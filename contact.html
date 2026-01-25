@@ -8,12 +8,25 @@
     <style>
         /* Global Styles - Consistent with Homepage */
         :root {
+            /* Dark Mode Colors (Original) */
             --primary-color: #4da6ff;
             --secondary-color: #36454F;
             --dark-color: #1a1a1a;
             --light-color: #f0f0f0;
             --accent-color: #ff6b6b;
             --card-bg: #2d3748;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Light Mode Colors - Same as Homepage */
+        body.light-mode {
+            --primary-color: #0B5884;
+            --secondary-color: #aec3d0;
+            --dark-color: #dadadb;
+            --light-color: #272a2f;
+            --accent-color: #FF9A76;
+            --card-bg: #dadadb;
+            --shadow-color: rgba(0, 0, 0, 0.08);
         }
         
         * {
@@ -27,6 +40,7 @@
             background-color: var(--dark-color);
             color: var(--light-color);
             line-height: 1.6;
+            transition: all 0.3s ease;
         }
         
         .container {
@@ -35,21 +49,43 @@
             padding: 0 20px;
         }
         
-        /* Header & Navigation - Same as Homepage */
-        header {
+        /* Rounded Navigation Header - Same as Homepage */
+        .rounded-header {
             background-color: var(--secondary-color);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            box-shadow: 0 4px 20px var(--shadow-color);
             position: fixed;
-            width: 100%;
+            width: 94%;
+            max-width: 1150px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 100;
             transition: all 0.3s ease;
+            margin-top: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(77, 166, 255, 0.1);
+        }
+        
+        body.light-mode .rounded-header {
+            border: 1px solid rgba(44, 130, 201, 0.1);
+        }
+        
+        .rounded-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+            z-index: 1;
         }
         
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 15px 30px;
         }
         
         .logo img {
@@ -62,48 +98,81 @@
             transform: scale(1.05);
         }
         
+        /* Logo visibility control - Same as Homepage */
+        .logo-dark {
+            display: block;
+        }
+        
+        .logo-light {
+            display: none;
+        }
+        
+        body.light-mode .logo-dark {
+            display: none;
+        }
+        
+        body.light-mode .logo-light {
+            display: block;
+        }
+        
         .nav-links {
             display: flex;
             list-style: none;
+            gap: 10px;
         }
         
         .nav-links li {
-            margin-left: 30px;
+            position: relative;
         }
         
         .nav-links a {
             text-decoration: none;
             color: var(--light-color);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
+            padding: 8px 18px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
+        .nav-links a::before {
+            content: '➤';
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateX(-5px);
         }
         
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .nav-links a:hover {
             color: var(--primary-color);
+            background-color: rgba(77, 166, 255, 0.1);
+        }
+        
+        body.light-mode .nav-links a:hover {
+            background-color: rgba(44, 130, 201, 0.1);
         }
         
         .nav-links a.active {
             color: var(--primary-color);
+            background-color: rgba(77, 166, 255, 0.15);
+            font-weight: 600;
         }
         
-        .nav-links a.active::after {
-            width: 100%;
+        body.light-mode .nav-links a.active {
+            background-color: rgba(44, 130, 201, 0.15);
+        }
+        
+        .nav-links a.active::before {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .hamburger {
@@ -112,11 +181,23 @@
             color: var(--light-color);
             font-size: 1.5rem;
             transition: transform 0.3s ease;
+            background: rgba(77, 166, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+        
+        body.light-mode .hamburger {
+            background: rgba(44, 130, 201, 0.1);
         }
         
         .hamburger:hover {
             color: var(--primary-color);
             transform: rotate(90deg);
+            background: rgba(77, 166, 255, 0.2);
+        }
+        
+        body.light-mode .hamburger:hover {
+            background: rgba(44, 130, 201, 0.2);
         }
         
         /* Contact Section */
@@ -140,16 +221,20 @@
             z-index: 0;
         }
         
+        body.light-mode .contact::before {
+            background: radial-gradient(circle, rgba(44, 130, 201, 0.1) 0%, transparent 70%);
+        }
+        
         .contact-content {
             display: flex;
             justify-content: space-between;
             position: relative;
             z-index: 1;
+            gap: 40px;
         }
         
         .contact-info {
             flex: 1;
-            padding-right: 50px;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease forwards 0.5s;
@@ -175,7 +260,8 @@
         
         .contact-info p {
             margin-bottom: 30px;
-            color: rgba(240, 240, 240, 0.8);
+            color: var(--light-color);
+            opacity: 0.8;
             font-size: 1.1rem;
             max-width: 500px;
         }
@@ -188,6 +274,27 @@
             display: flex;
             align-items: center;
             margin-bottom: 25px;
+            transition: transform 0.3s ease;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: rgba(77, 166, 255, 0.05);
+            border: 1px solid rgba(77, 166, 255, 0.1);
+        }
+        
+        body.light-mode .contact-item {
+            background-color: rgba(44, 130, 201, 0.05);
+            border: 1px solid rgba(44, 130, 201, 0.1);
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
+            background-color: rgba(77, 166, 255, 0.1);
+            border-color: rgba(77, 166, 255, 0.3);
+        }
+        
+        body.light-mode .contact-item:hover {
+            background-color: rgba(44, 130, 201, 0.1);
+            border-color: rgba(44, 130, 201, 0.3);
         }
         
         .contact-icon {
@@ -217,13 +324,51 @@
         }
         
         .contact-text a, .contact-text span {
-            color: rgba(240, 240, 240, 0.7);
+            color: var(--light-color);
+            opacity: 0.8;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
         
         .contact-text a:hover {
             color: var(--primary-color);
+            opacity: 1;
+        }
+        
+        /* Social Links in Contact Info */
+        .contact-social {
+            margin-top: 40px;
+        }
+        
+        .contact-social h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--light-color);
+        }
+        
+        .contact-social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .contact-social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            font-size: 1.2rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .contact-social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            transform: translateY(-5px) rotate(10deg);
         }
         
         /* Contact Form */
@@ -231,12 +376,27 @@
             flex: 1;
             background-color: var(--card-bg);
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px var(--shadow-color);
             border: 1px solid rgba(77, 166, 255, 0.2);
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease forwards 0.8s;
+            transition: all 0.4s ease;
+        }
+        
+        body.light-mode .contact-form {
+            border: 1px solid rgba(44, 130, 201, 0.2);
+        }
+        
+        .contact-form:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px var(--shadow-color);
+            border-color: rgba(77, 166, 255, 0.3);
+        }
+        
+        body.light-mode .contact-form:hover {
+            border-color: rgba(44, 130, 201, 0.3);
         }
         
         .form-group {
@@ -255,10 +415,15 @@
             padding: 12px 15px;
             background-color: rgba(240, 240, 240, 0.1);
             border: 1px solid rgba(77, 166, 255, 0.3);
-            border-radius: 5px;
+            border-radius: 8px;
             color: var(--light-color);
             font-size: 1rem;
             transition: all 0.3s ease;
+        }
+        
+        body.light-mode .form-control {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(44, 130, 201, 0.3);
         }
         
         .form-control:focus {
@@ -266,6 +431,11 @@
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(77, 166, 255, 0.2);
             background-color: rgba(240, 240, 240, 0.15);
+        }
+        
+        body.light-mode .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(44, 130, 201, 0.2);
+            background-color: rgba(0, 0, 0, 0.08);
         }
         
         textarea.form-control {
@@ -289,14 +459,39 @@
             overflow: hidden;
         }
         
+        body.light-mode .submit-btn {
+            box-shadow: 0 4px 15px rgba(44, 130, 201, 0.3);
+        }
+        
         .submit-btn:hover {
             background-color: var(--light-color);
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(77, 166, 255, 0.4);
         }
         
+        body.light-mode .submit-btn:hover {
+            box-shadow: 0 6px 20px rgba(44, 130, 201, 0.4);
+        }
+        
         .submit-btn:active {
             transform: translateY(1px);
+        }
+        
+        /* Form Success Message */
+        .form-success {
+            display: none;
+            background-color: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .form-success.show {
+            display: block;
         }
         
         /* Footer - Same as Homepage */
@@ -334,9 +529,55 @@
         }
         
         footer p {
-            color: rgba(240, 240, 240, 0.6);
+            color: var(--light-color);
+            opacity: 0.6;
             font-size: 0.9rem;
             margin-top: 20px;
+        }
+        
+        /* Theme Toggle Button - Same as Homepage */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .theme-toggle i {
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .theme-toggle:hover i {
+            transform: rotate(20deg);
+        }
+        
+        .fa-sun, .fa-moon {
+            position: absolute;
+        }
+        
+        body:not(.light-mode) .fa-moon {
+            display: none;
+        }
+        
+        body.light-mode .fa-sun {
+            display: none;
         }
         
         /* Animations */
@@ -362,12 +603,21 @@
         
         /* Responsive Design */
         @media (max-width: 992px) {
+            .rounded-header {
+                width: 96%;
+                border-radius: 30px;
+                margin-top: 10px;
+            }
+            
+            nav {
+                padding: 15px 20px;
+            }
+            
             .contact-content {
                 flex-direction: column;
             }
             
             .contact-info {
-                padding-right: 0;
                 margin-bottom: 50px;
             }
             
@@ -376,10 +626,13 @@
                 max-width: 600px;
                 margin: 0 auto;
             }
+            
+            .contact {
+                padding: 100px 0 60px;
+            }
         }
         
         @media (max-width: 768px) {
-            /* Navigation - Same as Homepage */
             .nav-links {
                 display: none;
                 flex-direction: column;
@@ -389,8 +642,9 @@
                 left: 0;
                 background-color: var(--secondary-color);
                 padding: 20px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 5px 10px var(--shadow-color);
                 z-index: 99;
+                border-radius: 0 0 15px 15px;
             }
             
             .nav-links.active {
@@ -398,15 +652,17 @@
             }
             
             .nav-links li {
-                margin: 15px 0;
+                margin: 10px 0;
+            }
+            
+            .nav-links a {
+                padding: 12px 20px;
+                border-radius: 10px;
+                justify-content: flex-start;
             }
             
             .hamburger {
                 display: block;
-            }
-            
-            .contact {
-                padding: 100px 0 60px;
             }
             
             .contact-info h2 {
@@ -416,27 +672,61 @@
             .contact-form {
                 padding: 30px;
             }
+            
+            .rounded-header {
+                border-radius: 20px;
+            }
+            
+            .theme-toggle {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .rounded-header {
+                border-radius: 15px;
+                width: 98%;
+                margin-top: 10px;
+            }
+            
+            nav {
+                padding: 12px 15px;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            .contact-form {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo"><img src="Logo.png" alt="logo" style="height: 40px;"></div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="contact.html" class="active">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
+    <!-- Rounded Navigation Header - Same as Homepage -->
+    <header class="rounded-header">
+        <nav>
+            <div class="logo">
+                <!-- Dark mode logo -->
+                <img src="Logo.png" alt="Ammal Raheem Logo" class="logo-dark">
+                <!-- Light mode logo -->
+                <img src="Logo light.png" alt="Ammal Raheem Logo" class="logo-light">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
     </header>
 
     <!-- Contact Section -->
@@ -445,7 +735,7 @@
             <div class="contact-content">
                 <div class="contact-info">
                     <h2>Get In Touch</h2>
-                    <p>Have a project in mind or want to discuss potential opportunities? Feel free to reach out through the form or directly via my contact details below.</p>
+                    <p>Have a project in mind or want to discuss potential opportunities? Feel free to reach out through the form or directly via my contact details below. I typically respond within 24 hours.</p>
                     
                     <div class="contact-details">
                         <div class="contact-item">
@@ -478,31 +768,46 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="contact-social">
+                        <h3>Connect with me</h3>
+                        <div class="contact-social-links">
+                            <a href="https://github.com/AmmalR" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/not_ar02?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="contact-form">
                     <form id="contactForm" action="#" method="POST">
                         <div class="form-group">
                             <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" required placeholder="Enter your name">
                         </div>
                         
                         <div class="form-group">
                             <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email">
                         </div>
                         
                         <div class="form-group">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" class="form-control" required>
+                            <input type="text" id="subject" name="subject" class="form-control" required placeholder="What is this regarding?">
                         </div>
                         
                         <div class="form-group">
                             <label for="message">Your Message</label>
-                            <textarea id="message" name="message" class="form-control" required></textarea>
+                            <textarea id="message" name="message" class="form-control" required placeholder="Your message here..."></textarea>
                         </div>
                         
-                        <button type="submit" class="submit-btn">Send Message</button>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                        
+                        <div id="formSuccess" class="form-success">
+                            <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.
+                        </div>
                     </form>
                 </div>
             </div>
@@ -521,8 +826,14 @@
         </div>
     </footer>
 
+    <!-- Theme Toggle Button - Same as Homepage -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </div>
+
     <script>
-        // Mobile Navigation Toggle
+        // Mobile Navigation Toggle - Same as Homepage
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         
@@ -539,20 +850,35 @@
             });
         });
         
-        // Change navbar style on scroll
+        // Change navbar style on scroll - Same as Homepage
         window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
+            const header = document.querySelector('.rounded-header');
             if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
-                header.style.padding = '10px 0';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+                header.style.width = '100%';
+                header.style.borderRadius = '0 0 20px 20px';
+                header.style.marginTop = '0';
             } else {
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
-                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
+                if (window.innerWidth > 768) {
+                    header.style.width = '94%';
+                    header.style.borderRadius = '50px';
+                    header.style.marginTop = '20px';
+                } else if (window.innerWidth > 480) {
+                    header.style.width = '96%';
+                    header.style.borderRadius = '30px';
+                    header.style.marginTop = '10px';
+                } else {
+                    header.style.width = '98%';
+                    header.style.borderRadius = '15px';
+                    header.style.marginTop = '10px';
+                }
             }
         });
         
-        // Form submission handling
+        // Enhanced Form submission handling
         const contactForm = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
         
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -563,13 +889,83 @@
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
             
-            // Here you would typically send the form data to a server
-            // For demonstration, we'll just show an alert
-            alert(`Thank you, ${name}! Your message has been sent. I'll get back to you soon at ${email}.`);
+            // Validate form (basic validation)
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
             
-            // Reset the form
-            contactForm.reset();
+            // Email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Show loading state on button
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call delay (replace with actual fetch request to your backend)
+            setTimeout(() => {
+                // Show success message
+                formSuccess.classList.add('show');
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // Reset the form
+                contactForm.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    formSuccess.classList.remove('show');
+                }, 5000);
+            }, 1500);
         });
+        
+        // Theme Toggle Functionality with logo switching
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            switchLogos(true); // Switch to light mode logos
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const isLightMode = document.body.classList.toggle('light-mode');
+            
+            // Switch logos based on mode
+            switchLogos(isLightMode);
+            
+            // Save preference
+            const currentTheme = isLightMode ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+        });
+        
+        // Function to switch logos
+        function switchLogos(isLightMode) {
+            const logoDark = document.querySelector('.logo-dark');
+            const logoLight = document.querySelector('.logo-light');
+            
+            if (isLightMode) {
+                // Switch to light mode
+                if (logoDark) logoDark.style.display = 'none';
+                if (logoLight) logoLight.style.display = 'block';
+            } else {
+                // Switch to dark mode
+                if (logoDark) logoDark.style.display = 'block';
+                if (logoLight) logoLight.style.display = 'none';
+            }
+        }
+        
+        // Initialize header style on load
+        window.dispatchEvent(new Event('scroll'));
     </script>
 </body>
 </html>

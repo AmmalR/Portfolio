@@ -6,14 +6,27 @@
     <title>Ammal Raheem | About</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Global Styles - Consistent with Portfolio */
+        /* Global Styles */
         :root {
+            /* Dark Mode Colors (Original) */
             --primary-color: #4da6ff;
             --secondary-color: #36454F;
             --dark-color: #1a1a1a;
             --light-color: #f0f0f0;
             --accent-color: #ff6b6b;
             --card-bg: #2d3748;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Light Mode Colors - Same as Homepage */
+        body.light-mode {
+            --primary-color: #0B5884;
+            --secondary-color: #aec3d0;
+            --dark-color: #dadadb;
+            --light-color: #272a2f;
+            --accent-color: #FF9A76;
+            --card-bg: #dadadb;
+            --shadow-color: rgba(0, 0, 0, 0.08);
         }
         
         * {
@@ -27,6 +40,7 @@
             background-color: var(--dark-color);
             color: var(--light-color);
             line-height: 1.6;
+            transition: all 0.3s ease;
         }
         
         .container {
@@ -35,21 +49,43 @@
             padding: 0 20px;
         }
         
-        /* Header & Navigation - Same as Portfolio */
-        header {
+        /* Rounded Navigation Header - Same as Homepage */
+        .rounded-header {
             background-color: var(--secondary-color);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            box-shadow: 0 4px 20px var(--shadow-color);
             position: fixed;
-            width: 100%;
+            width: 94%;
+            max-width: 1150px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 100;
             transition: all 0.3s ease;
+            margin-top: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(77, 166, 255, 0.1);
+        }
+        
+        body.light-mode .rounded-header {
+            border: 1px solid rgba(44, 130, 201, 0.1);
+        }
+        
+        .rounded-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+            z-index: 1;
         }
         
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 15px 30px;
         }
         
         .logo img {
@@ -62,48 +98,81 @@
             transform: scale(1.05);
         }
         
+        /* Logo visibility control - Same as Homepage */
+        .logo-dark {
+            display: block;
+        }
+        
+        .logo-light {
+            display: none;
+        }
+        
+        body.light-mode .logo-dark {
+            display: none;
+        }
+        
+        body.light-mode .logo-light {
+            display: block;
+        }
+        
         .nav-links {
             display: flex;
             list-style: none;
+            gap: 10px;
         }
         
         .nav-links li {
-            margin-left: 30px;
+            position: relative;
         }
         
         .nav-links a {
             text-decoration: none;
             color: var(--light-color);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
+            padding: 8px 18px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
+        .nav-links a::before {
+            content: '➤';
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateX(-5px);
         }
         
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .nav-links a:hover {
             color: var(--primary-color);
+            background-color: rgba(77, 166, 255, 0.1);
+        }
+        
+        body.light-mode .nav-links a:hover {
+            background-color: rgba(44, 130, 201, 0.1);
         }
         
         .nav-links a.active {
             color: var(--primary-color);
+            background-color: rgba(77, 166, 255, 0.15);
+            font-weight: 600;
         }
         
-        .nav-links a.active::after {
-            width: 100%;
+        body.light-mode .nav-links a.active {
+            background-color: rgba(44, 130, 201, 0.15);
+        }
+        
+        .nav-links a.active::before {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .hamburger {
@@ -112,11 +181,23 @@
             color: var(--light-color);
             font-size: 1.5rem;
             transition: transform 0.3s ease;
+            background: rgba(77, 166, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+        
+        body.light-mode .hamburger {
+            background: rgba(44, 130, 201, 0.1);
         }
         
         .hamburger:hover {
             color: var(--primary-color);
             transform: rotate(90deg);
+            background: rgba(77, 166, 255, 0.2);
+        }
+        
+        body.light-mode .hamburger:hover {
+            background: rgba(44, 130, 201, 0.2);
         }
         
         /* About Section */
@@ -137,6 +218,10 @@
             background: radial-gradient(circle, rgba(77, 166, 255, 0.1) 0%, transparent 70%);
             animation: pulse 15s infinite linear;
             z-index: 0;
+        }
+        
+        body.light-mode .about::before {
+            background: radial-gradient(circle, rgba(44, 130, 201, 0.1) 0%, transparent 70%);
         }
         
         .about-content {
@@ -176,11 +261,30 @@
         .about-text p {
             font-size: 1.1rem;
             margin-bottom: 20px;
-            color: rgba(240, 240, 240, 0.8);
+            color: var(--light-color);
+            opacity: 0.8;
         }
         
         .skills-progress {
             margin-top: 40px;
+        }
+        
+        .skills-progress h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .skills-progress h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
         }
         
         .skill-item {
@@ -200,6 +304,7 @@
         
         .skill-percent {
             color: var(--primary-color);
+            font-weight: 600;
         }
         
         .progress-bar {
@@ -207,6 +312,10 @@
             background-color: rgba(240, 240, 240, 0.1);
             border-radius: 4px;
             overflow: hidden;
+        }
+        
+        body.light-mode .progress-bar {
+            background-color: rgba(0, 0, 0, 0.1);
         }
         
         .progress {
@@ -223,7 +332,7 @@
             flex-direction: column;
             gap: 30px;
             position: sticky;
-            top: 100px;
+            top: 120px;
         }
 
         .profile-img-container {
@@ -233,8 +342,13 @@
             margin: 0 auto;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 40px var(--shadow-color);
             border: 3px solid rgba(77, 166, 255, 0.2);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        body.light-mode .profile-img-container {
+            border: 3px solid rgba(44, 130, 201, 0.2);
         }
 
         .profile-img-container img {
@@ -244,6 +358,11 @@
             transition: transform 0.5s ease;
         }
 
+        .profile-img-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px var(--shadow-color);
+        }
+        
         .profile-img-container:hover img {
             transform: scale(1.05);
         }
@@ -253,11 +372,26 @@
             padding: 25px;
             border-radius: 15px;
             width: 100%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px var(--shadow-color);
             border: 1px solid rgba(77, 166, 255, 0.1);
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease forwards 0.7s;
+            transition: all 0.4s ease;
+        }
+        
+        body.light-mode .tech-stack {
+            border: 1px solid rgba(44, 130, 201, 0.1);
+        }
+        
+        .tech-stack:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow-color);
+            border-color: rgba(77, 166, 255, 0.3);
+        }
+        
+        body.light-mode .tech-stack:hover {
+            border-color: rgba(44, 130, 201, 0.3);
         }
 
         .tech-stack h3 {
@@ -310,7 +444,8 @@
 
         .tech-name {
             font-size: 0.8rem;
-            color: rgba(240, 240, 240, 0.8);
+            color: var(--light-color);
+            opacity: 0.8;
             text-align: center;
         }
 
@@ -318,11 +453,26 @@
             background-color: var(--card-bg);
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px var(--shadow-color);
             border: 1px solid rgba(77, 166, 255, 0.1);
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease forwards 0.9s;
+            transition: all 0.4s ease;
+        }
+        
+        body.light-mode .personal-info {
+            border: 1px solid rgba(44, 130, 201, 0.1);
+        }
+        
+        .personal-info:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow-color);
+            border-color: rgba(77, 166, 255, 0.3);
+        }
+        
+        body.light-mode .personal-info:hover {
+            border-color: rgba(44, 130, 201, 0.3);
         }
 
         .personal-info h3 {
@@ -347,6 +497,11 @@
         .info-item {
             display: flex;
             margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .info-item:hover {
+            transform: translateX(5px);
         }
 
         .info-icon {
@@ -361,7 +516,8 @@
 
         .info-label {
             font-size: 0.8rem;
-            color: rgba(240, 240, 240, 0.6);
+            color: var(--light-color);
+            opacity: 0.6;
         }
 
         .info-value {
@@ -396,7 +552,14 @@
             position: relative;
             padding-left: 30px;
             margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
         }
+        
+        .timeline-item:nth-child(1) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.8s; }
+        .timeline-item:nth-child(3) { animation-delay: 1.0s; }
         
         .timeline-item::before {
             content: '';
@@ -427,6 +590,7 @@
         .timeline-date {
             font-size: 0.9rem;
             color: var(--primary-color);
+            font-weight: 600;
             margin-bottom: 5px;
         }
         
@@ -437,11 +601,65 @@
         }
         
         .timeline-description {
-            color: rgba(240, 240, 240, 0.7);
+            color: var(--light-color);
+            opacity: 0.7;
             font-size: 0.95rem;
         }
         
-        /* Footer - Same as Portfolio */
+        /* Buttons - Same as Homepage */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 15px;
+            box-shadow: 0 4px 15px rgba(77, 166, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        body.light-mode .btn {
+            box-shadow: 0 4px 15px rgba(44, 130, 201, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: var(--light-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(77, 166, 255, 0.4);
+        }
+        
+        body.light-mode .btn:hover {
+            box-shadow: 0 6px 20px rgba(44, 130, 201, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(77, 166, 255, 0.1);
+            color: var(--light-color);
+        }
+        
+        body.light-mode .btn-outline:hover {
+            background-color: rgba(44, 130, 201, 0.1);
+        }
+        
+        /* Footer - Same as Homepage */
         footer {
             background-color: var(--dark-color);
             color: var(--light-color);
@@ -476,9 +694,55 @@
         }
         
         footer p {
-            color: rgba(240, 240, 240, 0.6);
+            color: var(--light-color);
+            opacity: 0.6;
             font-size: 0.9rem;
             margin-top: 20px;
+        }
+        
+        /* Theme Toggle Button - Same as Homepage */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .theme-toggle i {
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .theme-toggle:hover i {
+            transform: rotate(20deg);
+        }
+        
+        .fa-sun, .fa-moon {
+            position: absolute;
+        }
+        
+        body:not(.light-mode) .fa-moon {
+            display: none;
+        }
+        
+        body.light-mode .fa-sun {
+            display: none;
         }
         
         /* Animations */
@@ -515,6 +779,16 @@
         
         /* Responsive Design */
         @media (max-width: 992px) {
+            .rounded-header {
+                width: 96%;
+                border-radius: 30px;
+                margin-top: 10px;
+            }
+            
+            nav {
+                padding: 15px 20px;
+            }
+            
             .about-content {
                 flex-direction: column;
             }
@@ -525,10 +799,13 @@
                 margin: 40px auto 0;
                 position: static;
             }
+            
+            .about {
+                padding: 100px 0 60px;
+            }
         }
         
         @media (max-width: 768px) {
-            /* Navigation */
             .nav-links {
                 display: none;
                 flex-direction: column;
@@ -538,8 +815,9 @@
                 left: 0;
                 background-color: var(--secondary-color);
                 padding: 20px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 5px 10px var(--shadow-color);
                 z-index: 99;
+                border-radius: 0 0 15px 15px;
             }
             
             .nav-links.active {
@@ -547,15 +825,17 @@
             }
             
             .nav-links li {
-                margin: 15px 0;
+                margin: 10px 0;
+            }
+            
+            .nav-links a {
+                padding: 12px 20px;
+                border-radius: 10px;
+                justify-content: flex-start;
             }
             
             .hamburger {
                 display: block;
-            }
-            
-            .about {
-                padding: 100px 0 60px;
             }
             
             .about-text h1 {
@@ -565,27 +845,72 @@
             .profile-img-container {
                 max-width: 280px;
             }
+            
+            .tech-icons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .rounded-header {
+                border-radius: 20px;
+            }
+            
+            .theme-toggle {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .rounded-header {
+                border-radius: 15px;
+                width: 98%;
+                margin-top: 10px;
+            }
+            
+            nav {
+                padding: 12px 15px;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            .tech-icons {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .tech-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo"><img src="Logo.png" alt="logo" style="height: 40px;"></div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
+    <!-- Rounded Navigation Header - Same as Homepage -->
+    <header class="rounded-header">
+        <nav>
+            <div class="logo">
+                <!-- Dark mode logo -->
+                <img src="Logo.png" alt="Ammal Raheem Logo" class="logo-dark">
+                <!-- Light mode logo -->
+                <img src="Logo light.png" alt="Ammal Raheem Logo" class="logo-light">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
     </header>
 
     <!-- About Section -->
@@ -647,14 +972,14 @@
                         <h2>My Journey</h2>
                         
                         <div class="timeline-item">
-                            <div class="timeline-date">2021 - Present</div>
-                            <h3 class="timeline-title">BSc in Information Technology</h3>
-                            <p class="timeline-description">University of Education, Lahore - Developing expertise in software development and system architecture</p>
+                            <div class="timeline-date">Jan 2026 - Present</div>
+                            <h3 class="timeline-title">UI/UX Designer & Technical Assistant</h3>
+                            <p class="timeline-description">Malind Tech, Lahore - Designing and Developing interactive interfaces and supporting Development Team</p>
                         </div>
                         
                         <div class="timeline-item">
-                            <div class="timeline-date">Oct 2024 - Present</div>
-                            <h3 class="timeline-title">Oracle Technical Assistant</h3>
+                            <div class="timeline-date">Oct 2024 - Jan 2026</div>
+                            <h3 class="timeline-title">Oracle Technical Consultant<h3>
                             <p class="timeline-description">ICM Software House - Supporting Oracle applications and developing custom solutions</p>
                         </div>
                         
@@ -739,7 +1064,7 @@
                             </div>
                             <div class="info-content">
                                 <div class="info-label">Phone</div>
-                                <div class="info-value">+92 329 4968541</div>
+                                <div class="info-value">+92 327 4968541</div>
                             </div>
                         </div>
                         <div class="info-item">
@@ -769,8 +1094,14 @@
         </div>
     </footer>
 
+    <!-- Theme Toggle Button - Same as Homepage -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </div>
+
     <script>
-        // Mobile Navigation Toggle
+        // Mobile Navigation Toggle - Same as Homepage
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         
@@ -787,20 +1118,35 @@
             });
         });
         
-        // Change navbar style on scroll
+        // Change navbar style on scroll - Same as Homepage
         window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
+            const header = document.querySelector('.rounded-header');
             if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
-                header.style.padding = '10px 0';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+                header.style.width = '100%';
+                header.style.borderRadius = '0 0 20px 20px';
+                header.style.marginTop = '0';
             } else {
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
-                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
+                if (window.innerWidth > 768) {
+                    header.style.width = '94%';
+                    header.style.borderRadius = '50px';
+                    header.style.marginTop = '20px';
+                } else if (window.innerWidth > 480) {
+                    header.style.width = '96%';
+                    header.style.borderRadius = '30px';
+                    header.style.marginTop = '10px';
+                } else {
+                    header.style.width = '98%';
+                    header.style.borderRadius = '15px';
+                    header.style.marginTop = '10px';
+                }
             }
         });
         
         // Animate progress bars when they come into view
-        const progressBars = document.querySelectorAll('.progress');
+                // Animate progress bars when they come into view
+                const progressBars = document.querySelectorAll('.progress');
         
         function animateProgressBars() {
             progressBars.forEach(bar => {
@@ -812,7 +1158,7 @@
                     bar.style.width = '0';
                     setTimeout(() => {
                         bar.style.width = width;
-                    }, 100);
+                    }, 300);
                 }
             });
         }
@@ -820,6 +1166,46 @@
         // Set initial state for animation
         window.addEventListener('load', animateProgressBars);
         window.addEventListener('scroll', animateProgressBars);
+        
+        // Theme Toggle Functionality with logo switching
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            switchLogos(true); // Switch to light mode logos
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const isLightMode = document.body.classList.toggle('light-mode');
+            
+            // Switch logos based on mode
+            switchLogos(isLightMode);
+            
+            // Save preference
+            const currentTheme = isLightMode ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+        });
+        
+        // Function to switch logos
+        function switchLogos(isLightMode) {
+            const logoDark = document.querySelector('.logo-dark');
+            const logoLight = document.querySelector('.logo-light');
+            
+            if (isLightMode) {
+                // Switch to light mode
+                if (logoDark) logoDark.style.display = 'none';
+                if (logoLight) logoLight.style.display = 'block';
+            } else {
+                // Switch to dark mode
+                if (logoDark) logoDark.style.display = 'block';
+                if (logoLight) logoLight.style.display = 'none';
+            }
+        }
+        
+        // Initialize header style on load
+        window.dispatchEvent(new Event('scroll'));
     </script>
 </body>
 </html>

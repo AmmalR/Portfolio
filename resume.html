@@ -8,12 +8,25 @@
     <style>
         /* Global Styles - Consistent with Portfolio */
         :root {
+            /* Dark Mode Colors (Original) */
             --primary-color: #4da6ff;
             --secondary-color: #36454F;
             --dark-color: #1a1a1a;
             --light-color: #f0f0f0;
             --accent-color: #ff6b6b;
             --card-bg: #2d3748;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Light Mode Colors - Same as Homepage */
+        body.light-mode {
+            --primary-color: #0B5884;
+            --secondary-color: #aec3d0;
+            --dark-color: #dadadb;
+            --light-color: #272a2f;
+            --accent-color: #FF9A76;
+            --card-bg: #dadadb;
+            --shadow-color: rgba(0, 0, 0, 0.08);
         }
         
         * {
@@ -27,6 +40,7 @@
             background-color: var(--dark-color);
             color: var(--light-color);
             line-height: 1.6;
+            transition: all 0.3s ease;
         }
         
         .container {
@@ -35,21 +49,43 @@
             padding: 0 20px;
         }
         
-        /* Header & Navigation - Same as Portfolio */
-        header {
+        /* Rounded Navigation Header - Same as Homepage */
+        .rounded-header {
             background-color: var(--secondary-color);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            box-shadow: 0 4px 20px var(--shadow-color);
             position: fixed;
-            width: 100%;
+            width: 94%;
+            max-width: 1150px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 100;
             transition: all 0.3s ease;
+            margin-top: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(77, 166, 255, 0.1);
+        }
+        
+        body.light-mode .rounded-header {
+            border: 1px solid rgba(44, 130, 201, 0.1);
+        }
+        
+        .rounded-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+            z-index: 1;
         }
         
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 15px 30px;
         }
         
         .logo img {
@@ -62,48 +98,81 @@
             transform: scale(1.05);
         }
         
+        /* Logo visibility control - Same as Homepage */
+        .logo-dark {
+            display: block;
+        }
+        
+        .logo-light {
+            display: none;
+        }
+        
+        body.light-mode .logo-dark {
+            display: none;
+        }
+        
+        body.light-mode .logo-light {
+            display: block;
+        }
+        
         .nav-links {
             display: flex;
             list-style: none;
+            gap: 10px;
         }
         
         .nav-links li {
-            margin-left: 30px;
+            position: relative;
         }
         
         .nav-links a {
             text-decoration: none;
             color: var(--light-color);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
+            padding: 8px 18px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
+        .nav-links a::before {
+            content: '➤';
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateX(-5px);
         }
         
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .nav-links a:hover {
             color: var(--primary-color);
+            background-color: rgba(77, 166, 255, 0.1);
+        }
+        
+        body.light-mode .nav-links a:hover {
+            background-color: rgba(44, 130, 201, 0.1);
         }
         
         .nav-links a.active {
             color: var(--primary-color);
+            background-color: rgba(77, 166, 255, 0.15);
+            font-weight: 600;
         }
         
-        .nav-links a.active::after {
-            width: 100%;
+        body.light-mode .nav-links a.active {
+            background-color: rgba(44, 130, 201, 0.15);
+        }
+        
+        .nav-links a.active::before {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .hamburger {
@@ -112,11 +181,23 @@
             color: var(--light-color);
             font-size: 1.5rem;
             transition: transform 0.3s ease;
+            background: rgba(77, 166, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+        
+        body.light-mode .hamburger {
+            background: rgba(44, 130, 201, 0.1);
         }
         
         .hamburger:hover {
             color: var(--primary-color);
             transform: rotate(90deg);
+            background: rgba(77, 166, 255, 0.2);
+        }
+        
+        body.light-mode .hamburger:hover {
+            background: rgba(44, 130, 201, 0.2);
         }
         
         /* Resume Section */
@@ -139,17 +220,36 @@
             z-index: 0;
         }
         
+        body.light-mode .resume::before {
+            background: radial-gradient(circle, rgba(44, 130, 201, 0.1) 0%, transparent 70%);
+        }
+        
         .resume-container {
             position: relative;
             z-index: 1;
             background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px var(--shadow-color);
             padding: 40px;
             border: 1px solid rgba(77, 166, 255, 0.2);
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease forwards 0.5s;
+            transition: all 0.4s ease;
+        }
+        
+        body.light-mode .resume-container {
+            border: 1px solid rgba(44, 130, 201, 0.2);
+        }
+        
+        .resume-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px var(--shadow-color);
+            border-color: rgba(77, 166, 255, 0.3);
+        }
+        
+        body.light-mode .resume-container:hover {
+            border-color: rgba(44, 130, 201, 0.3);
         }
         
         .resume-header {
@@ -166,7 +266,8 @@
         }
         
         .resume-header p {
-            color: rgba(240, 240, 240, 0.8);
+            color: var(--light-color);
+            opacity: 0.8;
             font-size: 1.1rem;
             margin-bottom: 15px;
         }
@@ -181,14 +282,33 @@
         
         .contact-info a {
             color: var(--light-color);
+            opacity: 0.8;
             text-decoration: none;
             display: flex;
             align-items: center;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: rgba(77, 166, 255, 0.05);
+            border: 1px solid rgba(77, 166, 255, 0.1);
+        }
+        
+        body.light-mode .contact-info a {
+            background-color: rgba(44, 130, 201, 0.05);
+            border: 1px solid rgba(44, 130, 201, 0.1);
         }
         
         .contact-info a:hover {
             color: var(--primary-color);
+            opacity: 1;
+            background-color: rgba(77, 166, 255, 0.1);
+            border-color: rgba(77, 166, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        body.light-mode .contact-info a:hover {
+            background-color: rgba(44, 130, 201, 0.1);
+            border-color: rgba(44, 130, 201, 0.3);
         }
         
         .contact-info i {
@@ -253,13 +373,23 @@
         }
         
         .date {
-            color: rgba(240, 240, 240, 0.7);
+            color: var(--light-color);
+            opacity: 0.7;
             font-size: 0.9rem;
+            background-color: rgba(77, 166, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-weight: 500;
+        }
+        
+        body.light-mode .date {
+            background-color: rgba(44, 130, 201, 0.1);
         }
         
         .job-description, .project-description {
             margin-bottom: 15px;
-            color: rgba(240, 240, 240, 0.8);
+            color: var(--light-color);
+            opacity: 0.8;
         }
         
         .responsibilities, .achievements, .skills-list {
@@ -268,7 +398,8 @@
         
         .responsibilities li, .achievements li, .skills-list li {
             margin-bottom: 8px;
-            color: rgba(240, 240, 240, 0.8);
+            color: var(--light-color);
+            opacity: 0.8;
             position: relative;
         }
         
@@ -284,7 +415,8 @@
         .sub-title {
             font-weight: 600;
             color: var(--light-color);
-            margin: 10px 0 5px;
+            margin: 15px 0 8px;
+            font-size: 1.1rem;
         }
         
         .skills-container {
@@ -296,19 +428,59 @@
         
         .skill-category {
             background-color: rgba(77, 166, 255, 0.05);
-            padding: 15px;
-            border-radius: 5px;
+            padding: 20px;
+            border-radius: 10px;
             border-left: 3px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        
+        body.light-mode .skill-category {
+            background-color: rgba(44, 130, 201, 0.05);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            background-color: rgba(77, 166, 255, 0.1);
+        }
+        
+        body.light-mode .skill-category:hover {
+            background-color: rgba(44, 130, 201, 0.1);
         }
         
         .skill-category h4 {
             color: var(--primary-color);
-            margin-bottom: 10px;
-            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .certifications-list {
+            columns: 2;
+            gap: 30px;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-top: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            color: var(--light-color);
+            transform: translateX(5px);
+        }
+        
+        .project-link i {
+            margin-right: 6px;
         }
         
         .download-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 12px 30px;
             background-color: var(--primary-color);
             color: var(--dark-color);
@@ -326,17 +498,25 @@
             text-align: center;
         }
         
+        body.light-mode .download-btn {
+            box-shadow: 0 4px 15px rgba(44, 130, 201, 0.3);
+        }
+        
         .download-btn:hover {
             background-color: var(--light-color);
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(77, 166, 255, 0.4);
         }
         
+        body.light-mode .download-btn:hover {
+            box-shadow: 0 6px 20px rgba(44, 130, 201, 0.4);
+        }
+        
         .download-btn i {
             margin-right: 8px;
         }
         
-        /* Footer - Same as Portfolio */
+        /* Footer - Same as Homepage */
         footer {
             background-color: var(--dark-color);
             color: var(--light-color);
@@ -371,9 +551,55 @@
         }
         
         footer p {
-            color: rgba(240, 240, 240, 0.6);
+            color: var(--light-color);
+            opacity: 0.6;
             font-size: 0.9rem;
             margin-top: 20px;
+        }
+        
+        /* Theme Toggle Button - Same as Homepage */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .theme-toggle i {
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .theme-toggle:hover i {
+            transform: rotate(20deg);
+        }
+        
+        .fa-sun, .fa-moon {
+            position: absolute;
+        }
+        
+        body:not(.light-mode) .fa-moon {
+            display: none;
+        }
+        
+        body.light-mode .fa-sun {
+            display: none;
         }
         
         /* Animations */
@@ -398,8 +624,27 @@
         }
         
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .rounded-header {
+                width: 96%;
+                border-radius: 30px;
+                margin-top: 10px;
+            }
+            
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .certifications-list {
+                columns: 1;
+            }
+            
+            .resume {
+                padding: 100px 0 60px;
+            }
+        }
+        
         @media (max-width: 768px) {
-            /* Navigation */
             .nav-links {
                 display: none;
                 flex-direction: column;
@@ -409,8 +654,9 @@
                 left: 0;
                 background-color: var(--secondary-color);
                 padding: 20px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 5px 10px var(--shadow-color);
                 z-index: 99;
+                border-radius: 0 0 15px 15px;
             }
             
             .nav-links.active {
@@ -418,15 +664,17 @@
             }
             
             .nav-links li {
-                margin: 15px 0;
+                margin: 10px 0;
+            }
+            
+            .nav-links a {
+                padding: 12px 20px;
+                border-radius: 10px;
+                justify-content: flex-start;
             }
             
             .hamburger {
                 display: block;
-            }
-            
-            .resume {
-                padding: 100px 0 60px;
             }
             
             .resume-container {
@@ -443,28 +691,72 @@
             
             .date {
                 margin-top: 5px;
+                align-self: flex-start;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .rounded-header {
+                border-radius: 20px;
+            }
+            
+            .theme-toggle {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .rounded-header {
+                border-radius: 15px;
+                width: 98%;
+                margin-top: 10px;
+            }
+            
+            nav {
+                padding: 12px 15px;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            .resume-container {
+                padding: 20px;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo"><img src="Logo.png" alt="logo" style="height: 40px;"></div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="resume.html" class="active">Resume</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
+    <!-- Rounded Navigation Header - Same as Homepage -->
+    <header class="rounded-header">
+        <nav>
+            <div class="logo">
+                <!-- Dark mode logo -->
+                <img src="Logo.png" alt="Ammal Raheem Logo" class="logo-dark">
+                <!-- Light mode logo -->
+                <img src="Logo light.png" alt="Ammal Raheem Logo" class="logo-light">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="resume.html" class="active">Resume</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
     </header>
 
     <!-- Resume Section -->
@@ -473,11 +765,12 @@
             <div class="resume-container">
                 <div class="resume-header">
                     <h1>AMMAL RAHEEM</h1>
-                    <p>Oracle Technical Consultant & IT Student specializing in Android Application Development</p>
+                    <p>UI/UX Designer & Oracle Technical Consultant | IT Graduate specializing in Full-Stack Development</p>
                     <div class="contact-info">
                         <a href="mailto:ammalraheem14@gmail.com"><i class="fas fa-envelope"></i> ammalraheem14@gmail.com</a>
                         <a href="tel:+923274968541"><i class="fas fa-phone"></i> +92 327 4968541</a>
                         <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/"><i class="fab fa-linkedin"></i> LinkedIn Profile</a>
+                        <a href="https://github.com/AmmalR"><i class="fab fa-github"></i> GitHub Profile</a>
                     </div>
                 </div>
                 
@@ -488,20 +781,51 @@
                     <div class="experience-item">
                         <div class="job-header">
                             <div>
-                                <h3 class="job-title">Oracle Technical Assistant</h3>
-                                <p class="company">ICM SOFTWARE HOUSE</p>
+                                <h3 class="job-title">UI/UX Designer & Technical Assistant</h3>
+                                <p class="company">MALIND TECH</p>
                             </div>
-                            <p class="date">October 2024 – till date</p>
+                            <p class="date">February 2026 – Present</p>
                         </div>
                         <div class="job-description">
                             <p class="sub-title">Key Responsibilities:</p>
                             <ul class="responsibilities">
-                                <li>Provide technical support for Oracle Apex, EBS, and Fusion applications.</li>
-                                <li>Develop and maintain custom applications and reports.</li>
-                                <li>Perform database administration tasks, including backup, recovery, and performance tuning.</li>
+                                <li>Design visually compelling graphics and user-centered UI/UX for web and mobile platforms, including wireframes, user flows, and high-fidelity mockups.</li>
+                                <li>Maintain consistent brand identity across all platforms by managing standardized design systems, typography, and UI kits.</li>
+                                <li>Collaborate with cross-functional teams to translate business requirements into responsive, accessible, and high-performance designs.</li>
+                                <li>Manage the implementation, customization, and maintenance of ERP modules such as HRMS, Finance, and CRM to ensure operational efficiency.</li>
+                                <li>Provide technical support and monitor system performance to maintain data integrity and resolve user-reported issues.</li>
+                                <li>Oversee system security, including database backups, bug tracking, and coordinating upgrades with developers and consultants.</li>
+                                <li>Facilitate user enablement through hands-on training, technical documentation, and the preparation of comprehensive system reports.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <h3 class="job-title">Oracle Technical Consultant</h3>
+                                <p class="company">ICM SOFTWARE HOUSE</p>
+                            </div>
+                            <p class="date">October 2024 – January 2026</p>
+                        </div>
+                        <div class="job-description">
+                            <p class="sub-title">Key Responsibilities:</p>
+                            <ul class="responsibilities">
+                                <li>Managed full-cycle implementation, upgrade, and ongoing support for Oracle E-Business Suite (EBS) and Oracle Fusion Applications across modules including Financials (FIN), Supply Chain Management (SCM), and Human Capital Management (HCM).</li>
+                                <li>Provided techno-functional expertise by collaborating with business users to design and implement custom solutions, extensions, and enhancements tailored to complex business requirements.</li>
+                                <li>Designed, developed, and maintained technical components for Oracle EBS using a comprehensive set of tools: SQL/PLSQL, Oracle Forms/Reports, OAF.</li>
+                                <li>Developed and deployed critical reports, analytics, and data extracts in Oracle Fusion across Financials, SCM, and HCM domains using both legacy and modern Oracle reporting tools: BI Publisher, OTBI, Smart View, Oracle Reports.</li>
+                                <li>Performed database administration tasks, including backup, recovery, and performance tuning.</li>
                             </ul>
                             <p class="sub-title">Key Technologies:</p>
                             <p>Oracle Apex, Oracle EBS, Oracle Fusion Cloud, SQL, PL/SQL, Oracle VBCS, Oracle Redwood Applications</p>
+                            <p class="sub-title">Implementation Projects:</p>
+                            <ul class="responsibilities">
+                                <li>Oracle EBS - Emirat, Hail, KSA</li>
+                                <li>Oracle EBS - Delta Enterprises, Riyadh, KSA</li>
+                                <li>Oracle EBS - King Khaled Eye Specialist Hospital, Riyadh, KSA</li>
+                                <li>Oracle Fusion - The Arab Energy Funds</li>
+                            </ul>
                         </div>
                     </div>
                     
@@ -538,34 +862,15 @@
                     <div class="project-item">
                         <div class="project-header">
                             <div>
-                                <h3 class="project-title">Creative Pair</h3>
-                                <p class="project-tech">React Web Application</p>
-                            </div>
-                        </div>
-                        <div class="project-description">
-                            <ul class="responsibilities">
-                                <li>Creative Pair is a website built using React showcasing creative portfolios and ideas.</li>
-                                <li>Developed a modern, responsive UI with React, Tailwind CSS, and Framer Motion animations.</li>
-                                <li>Integrated dynamic routing with React Router and deployed on Netlify.</li>
-                                <li>Focused on clean design, performance optimization, and accessibility.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div>
                                 <h3 class="project-title">Care Without Fear</h3>
                                 <p class="project-tech">Android Application</p>
                             </div>
                         </div>
                         <div class="project-description">
                             <ul class="responsibilities">
-                                <li>Developed an Android application using XML and Java to digitalize healthcare and childcare services in Pakistan.</li>
-                                <li>Implemented key features including Stripe for secure payments, Firebase Cloud Messaging for instant communication, and Google Maps for live location tracking.</li>
-                                <li>Designed and integrated a unique emergency alert system, enabling both clients and caregivers (nurses, physiotherapists, and babysitters) to send instant alerts.</li>
-                                <li>Managed the project's codebase and version control using GitHub.</li>
-                                <li>Focused on creating a secure, accessible platform to improve the safety and efficiency of the healthcare ecosystem.</li>
+                                <li>A comprehensive Android application designed to digitalize and streamline healthcare and childcare services in Pakistan.</li>
+                                <li>Technologies Used: Java, XML, Firebase Cloud Messaging, Stripe API, Google Maps API, GitHub.</li>
+                                <li>Outcome: Created a secure, live-tracking platform that improves emergency response efficiency for nurses and physiotherapists.</li>
                             </ul>
                         </div>
                     </div>
@@ -573,15 +878,124 @@
                     <div class="project-item">
                         <div class="project-header">
                             <div>
-                                <h3 class="project-title">Blog Website “SCENTS”</h3>
-                                <p class="project-tech">HTML CSS JS</p>
+                                <h3 class="project-title">Creative Pair</h3>
+                                <p class="project-tech">React Web Application</p>
                             </div>
                         </div>
                         <div class="project-description">
                             <ul class="responsibilities">
-                                <li>It showcases a curated collection of scented candles and perfumes, utilizing responsive design principles to ensure optimal viewing on various devices.</li>
-                                <li>The website incorporates engaging visual elements and interactive features, such as hover effects and animations, to enhance the user experience.</li>
-                                <li>By effectively combining technical skills and aesthetic appeal, Scent provides a visually stunning and user-friendly platform for exploring fragrances.</li>
+                                <li>A modern web application built to showcase creative portfolios and innovative ideas.</li>
+                                <li>Technologies Used: React JS, Tailwind CSS, Frame Motion, React Router, Netlify.</li>
+                                <li>Outcome: Delivered a highly responsive, visually engaging site with smooth animations and optimized performance.</li>
+                            </ul>
+                            <a href="https://www.creativepair.site" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> www.creativepair.site
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">SCENTS Blog</h3>
+                                <p class="project-tech">E-commerce Style Blog</p>
+                            </div>
+                        </div>
+                        <div class="project-description">
+                            <ul class="responsibilities">
+                                <li>An aesthetic e-commerce style blog showcasing a curated collection of perfumes and scented candles.</li>
+                                <li>Technologies Used: Figma, HTML5, CSS3, JavaScript.</li>
+                                <li>Outcome: Successfully translated high-fidelity Figma designs into a functional, responsive website featuring interactive hover effects.</li>
+                            </ul>
+                            <a href="https://ammalr.github.io/Scents/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> https://ammalr.github.io/Scents/
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">Personal Portfolio</h3>
+                                <p class="project-tech">Professional Website</p>
+                            </div>
+                        </div>
+                        <div class="project-description">
+                            <ul class="responsibilities">
+                                <li>A professional personal website highlighting my journey as an IT student and Technical Consultant.</li>
+                                <li>Technologies Used: HTML, CSS, JavaScript.</li>
+                                <li>Outcome: Established a strong online presence that effectively communicates technical skills and past project success.</li>
+                            </ul>
+                            <a href="https://ammalr.github.io/Portfolio/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> https://ammalr.github.io/Portfolio/
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">Supead Company</h3>
+                                <p class="project-tech">Corporate Website</p>
+                            </div>
+                        </div>
+                        <div class="project-description">
+                            <ul class="responsibilities">
+                                <li>A multilingual corporate website for Supead, focusing on professional service presentation.</li>
+                                <li>Technologies Used: WordPress, Multilingual Plugins, Responsive Design Frameworks.</li>
+                                <li>Outcome: Improved user satisfaction by providing a seamless, localized experience across all device types.</li>
+                            </ul>
+                            <a href="https://www.supeadsa.com" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> www.supeadsa.com
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">ICM Software House</h3>
+                                <p class="project-tech">Global Multi-site Deployment</p>
+                            </div>
+                        </div>
+                        <div class="project-description">
+                            <ul class="responsibilities">
+                                <li>A global multi-site deployment for an international software house operating across Saudi Arabia, UK, USA, Canada, and Pakistan.</li>
+                                <li>Technologies Used: WordPress, Cross-domain Management.</li>
+                                <li>Outcome: Launched a visually stunning, intuitive platform that successfully represents the company's global reach.</li>
+                            </ul>
+                            <div class="project-links">
+                                <a href="https://www.icmsh.us" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> www.icmsh.us
+                                </a>
+                                <a href="https://www.icm-pak.com" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> www.icm-pak.com
+                                </a>
+                                <a href="https://www.icmsh.ca" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> www.icmsh.ca
+                                </a>
+                                <a href="https://www.icmsk.com" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> www.icmsk.com
+                                </a>
+                                <a href="https://www.icmsh.uk" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> www.icmsh.uk
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">Airport Management System</h3>
+                                <p class="project-tech">Database System</p>
+                            </div>
+                        </div>
+                        <div class="project-description">
+                            <ul class="responsibilities">
+                                <li>A backend system focused on the efficient storage and retrieval of flight and passenger data.</li>
+                                <li>Technologies Used: MySQL, Data Normalization.</li>
+                                <li>Outcome: Developed a secure, normalized relational schema that ensures data integrity and supports complex search queries.</li>
                             </ul>
                         </div>
                     </div>
@@ -590,94 +1004,14 @@
                         <div class="project-header">
                             <div>
                                 <h3 class="project-title">Library Management System</h3>
-                                <p class="project-tech">C++</p>
+                                <p class="project-tech">C++ Application</p>
                             </div>
                         </div>
                         <div class="project-description">
                             <ul class="responsibilities">
-                                <li>Implemented data structures (arrays, linked lists) to store and organize library data.</li>
-                                <li>Developed algorithms for searching, sorting, and managing book and member records.</li>
-                                <li>Implemented error handling and input validation to ensure data integrity.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div>
-                                <h3 class="project-title">Airport Management System</h3>
-                                <p class="project-tech">MySQL</p>
-                            </div>
-                        </div>
-                        <div class="project-description">
-                            <ul class="responsibilities">
-                                <li>Designed a relational database schema to efficiently store and retrieve airport data.</li>
-                                <li>Implemented SQL queries to perform complex data operations, such as searching, filtering, and reporting.</li>
-                                <li>Developed data normalization techniques to ensure data consistency and integrity.</li>
-                                <li>Implemented security measures to protect sensitive passenger and flight information.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div>
-                                <h3 class="project-title">Personal Portfolio</h3>
-                                <p class="project-tech">HTML CSS JS</p>
-                            </div>
-                        </div>
-                        <div class="project-description">
-                            <ul class="responsibilities">
-                                <li>It showcases my expertise and my Journey as an IT student and Oracle Technical Consultant</li>
-                                <li>The website incorporates engaging visual elements and interactive features, such as hover effects and animations, to enhance the user experience.</li>
-                                <li>By effectively combining technical skills and aesthetic appeal, My portfolio provides a detailed description of my Skills and Projects.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div>
-                                <h3 class="project-title">BotanicaOrganica</h3>
-                                <p class="project-tech">HTML CSS JS</p>
-                            </div>
-                        </div>
-                        <div class="project-description">
-                            <ul class="responsibilities">
-                                <li>It showcases my expertise and my Journey as an IT student and Oracle Technical Consultant</li>
-                                <li>The website incorporates engaging visual elements and interactive features, such as hover effects and animations, to enhance the user experience.</li>
-                                <li>By effectively combining technical skills and aesthetic appeal, BotanicaOrganica provides a platform for plants information growth procedures and our Botanist.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div>
-                                <h3 class="project-title">UI Design “SCENTS”</h3>
-                                <p class="project-tech">Figma</p>
-                            </div>
-                        </div>
-                        <div class="project-description">
-                            <ul class="responsibilities">
-                                <li>It showcases a curated collection of scented candles and perfumes, utilizing responsive design principles to ensure optimal viewing on various devices.</li>
-                                <li>By effectively combining technical skills and aesthetic appeal, Scent provides a visually stunning and user-friendly platform for exploring fragrances.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div>
-                                <h3 class="project-title">ICM Software House</h3>
-                                <p class="project-tech">WordPress</p>
-                            </div>
-                        </div>
-                        <div class="project-description">
-                            <ul class="responsibilities">
-                                <li>Your website offers an immersive fragrance experience through a curated collection of scented candles and perfumes, suggesting a thoughtful selection for discerning customers.</li>
-                                <li>The implementation of responsive design ensures an optimal viewing experience across all devices (desktop, tablet, smartphone), leading to greater user satisfaction.</li>
-                                <li>The website effectively combines technical skills and aesthetic appeal, resulting in a visually stunning and user-friendly platform that is both attractive and intuitive.</li>
+                                <li>A software solution for managing book records, member registrations, and library inventory.</li>
+                                <li>Technologies Used: C++, Data Structures (Arrays, Linked Lists).</li>
+                                <li>Outcome: Optimized library operations through the implementation of efficient searching and sorting algorithms.</li>
                             </ul>
                         </div>
                     </div>
@@ -690,7 +1024,7 @@
                     <div class="education-item">
                         <div class="education-header">
                             <div>
-                                <h3 class="degree">Bachelors of Science in Information Technology (IT)</h3>
+                                <h3 class="degree">Bachelor of Science in Information Technology (IT)</h3>
                                 <p class="institution">UNIVERSITY OF EDUCATION, LAHORE</p>
                             </div>
                             <p class="date">2021 - 2025</p>
@@ -710,7 +1044,7 @@
                     <div class="education-item">
                         <div class="education-header">
                             <div>
-                                <h3 class="degree">Matric</h3>
+                                <h3 class="degree">Matriculation</h3>
                                 <p class="institution">CANTT GRAMMAR SCHOOL, LAHORE</p>
                             </div>
                             <p class="date">2017 - 2019</p>
@@ -721,17 +1055,7 @@
                 <!-- Certifications -->
                 <div class="resume-section">
                     <h2 class="section-title">Certifications</h2>
-                    <ul class="skills-list">
-                        <li>Course for Freelancers and Entrepreneurs - Learn from Fiverr</li>
-                        <li>Basics of Graphic Designing - LinkedIn Learning</li>
-                        <li>MS Word - Coursera</li>
-                        <li>MS Excel - Coursera</li>
-                        <li>HTML - Sololearn</li>
-                        <li>CSS - Sololearn</li>
-                        <li>Introduction to Java Script - Sololearn</li>
-                        <li>Introduction to SQL - Sololearn</li>
-                        <li>SQL Intermediate - Sololearn</li>
-                        <li>SEO Foundations - LinkedIn Learning</li>
+                    <ul class="skills-list certifications-list">
                         <li>Oracle Fusion Cloud Applications ERP Foundations Certified Associate - Oracle MyLearn</li>
                         <li>Oracle Fusion Cloud Applications SCM Certified Foundations Associate - Oracle MyLearn</li>
                         <li>Oracle Fusion Cloud Applications HCM Certified Foundations Associate - Oracle MyLearn</li>
@@ -741,6 +1065,14 @@
                         <li>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate - Oracle MyLearn</li>
                         <li>Oracle Cloud Infrastructure 2025 Certified Foundations Associate - Oracle MyLearn</li>
                         <li>Oracle Data Platform 2025 Certified Foundations Associate - Oracle MyLearn</li>
+                        <li>Course for Freelancers and Entrepreneurs - Learn from Fiverr</li>
+                        <li>Basics of Graphic Designing - LinkedIn Learning</li>
+                        <li>HTML - Sololearn</li>
+                        <li>CSS - Sololearn</li>
+                        <li>Introduction to JavaScript - Sololearn</li>
+                        <li>Introduction to SQL - Sololearn</li>
+                        <li>SQL Intermediate - Sololearn</li>
+                        <li>SEO Foundations - LinkedIn Learning</li>
                     </ul>
                 </div>
                 
@@ -752,42 +1084,46 @@
                         <div class="skill-category">
                             <h4>Technical Skills</h4>
                             <ul class="skills-list">
-                                <li>Object Oriented Programming in C++</li>
-                                <li>Data Structure and Algorithm in C++</li>
-                                <li>Basics of Python</li>
-                                <li>WordPress</li>
-                                <li>Human Resource Management</li>
-                                <li>MS-Office</li>
-                                <li>Digital Marketing</li>
+                                <li>UI/UX Design & Prototyping</li>
+                                <li>Oracle EBS & Fusion Implementation</li>
+                                <li>SQL & PL/SQL Development</li>
                                 <li>Database Administration</li>
-                                <li>Enterprise Resource Planning</li>
-                                <li>Oracle EBS Implementations</li>
-                                <li>Oracle Visual builder Cloud Services</li>
-                                <li>Form and Report Builder</li>
-                                <li>Oracle APEX</li>
-                                <li>Git & GitHub</li>
-                                <li>Oracle Redwood Applications</li>
-                                <li>Oracle VBCS</li>
+                                <li>React & JavaScript Development</li>
+                                <li>HTML5, CSS3, & Responsive Design</li>
+                                <li>Android App Development (Java, XML)</li>
+                                <li>WordPress & CMS Development</li>
+                                <li>C++ Programming & Data Structures</li>
+                                <li>Git & Version Control</li>
                             </ul>
                         </div>
                         
                         <div class="skill-category">
-                            <h4>Language Skills</h4>
+                            <h4>Design & Tools</h4>
                             <ul class="skills-list">
-                                <li>Proof Reading</li>
-                                <li>Communication Skills</li>
-                                <li>Fluency in English & Urdu Language</li>
+                                <li>Figma (UI/UX Design)</li>
+                                <li>Adobe Creative Suite</li>
+                                <li>Wireframing & Prototyping</li>
+                                <li>Design Systems & UI Kits</li>
+                                <li>Brand Identity Design</li>
+                                <li>Oracle Apex & VBCS</li>
+                                <li>Oracle Redwood Applications</li>
+                                <li>Firebase & Cloud Services</li>
+                                <li>Netlify & Web Deployment</li>
                             </ul>
                         </div>
                         
                         <div class="skill-category">
                             <h4>Soft Skills</h4>
                             <ul class="skills-list">
-                                <li>Organizational Skills</li>
-                                <li>Time Management Skills</li>
-                                <li>Ability to Work Under Pressure</li>
-                                <li>Ability to work as a Team Member</li>
-                                <li>Task Oriented Person</li>
+                                <li>Cross-functional Collaboration</li>
+                                <li>Client Communication & Training</li>
+                                <li>Project Management</li>
+                                <li>Technical Documentation</li>
+                                <li>Problem Solving & Troubleshooting</li>
+                                <li>Team Leadership</li>
+                                <li>Time Management</li>
+                                <li>Adaptability & Learning</li>
+                                <li>Attention to Detail</li>
                             </ul>
                         </div>
                     </div>
@@ -810,12 +1146,18 @@
                 <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/"><i class="fab fa-linkedin"></i></a>
                 <a href="https://www.instagram.com/not_ar02?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
             </div>
-            <p>&copy; 2025 Ammal Raheem. All rights reserved.</p>
+            <p>&copy; 2026 Ammal Raheem. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Theme Toggle Button - Same as Homepage -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </div>
+
     <script>
-        // Mobile Navigation Toggle
+        // Mobile Navigation Toggle - Same as Homepage
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         
@@ -832,17 +1174,112 @@
             });
         });
         
-        // Change navbar style on scroll
+        // Change navbar style on scroll - Same as Homepage
         window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
+            const header = document.querySelector('.rounded-header');
             if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
-                header.style.padding = '10px 0';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+                header.style.width = '100%';
+                header.style.borderRadius = '0 0 20px 20px';
+                header.style.marginTop = '0';
             } else {
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
-                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
+                if (window.innerWidth > 768) {
+                    header.style.width = '94%';
+                    header.style.borderRadius = '50px';
+                    header.style.marginTop = '20px';
+                } else if (window.innerWidth > 480) {
+                    header.style.width = '96%';
+                    header.style.borderRadius = '30px';
+                    header.style.marginTop = '10px';
+                } else {
+                    header.style.width = '98%';
+                    header.style.borderRadius = '15px';
+                    header.style.marginTop = '10px';
+                }
             }
         });
+        
+        // Theme Toggle Functionality with logo switching
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            switchLogos(true); // Switch to light mode logos
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const isLightMode = document.body.classList.toggle('light-mode');
+            
+            // Switch logos based on mode
+            switchLogos(isLightMode);
+            
+            // Save preference
+            const currentTheme = isLightMode ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+        });
+        
+        // Function to switch logos
+        function switchLogos(isLightMode) {
+            const logoDark = document.querySelector('.logo-dark');
+            const logoLight = document.querySelector('.logo-light');
+            
+            if (isLightMode) {
+                // Switch to light mode
+                if (logoDark) logoDark.style.display = 'none';
+                if (logoLight) logoLight.style.display = 'block';
+            } else {
+                // Switch to dark mode
+                if (logoDark) logoDark.style.display = 'block';
+                if (logoLight) logoLight.style.display = 'none';
+            }
+        }
+        
+        // Initialize header style on load
+        window.dispatchEvent(new Event('scroll'));
+        
+        // Add hover effect to project items
+        const projectItems = document.querySelectorAll('.project-item');
+        projectItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateX(10px)';
+                item.style.transition = 'transform 0.3s ease';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateX(0)';
+            });
+        });
+        
+        // Add animation to skill categories when they come into view
+        const skillCategories = document.querySelectorAll('.skill-category');
+        
+        function animateSkills() {
+            skillCategories.forEach((category, index) => {
+                const categoryPosition = category.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (categoryPosition < screenPosition) {
+                    setTimeout(() => {
+                        category.style.opacity = '1';
+                        category.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }
+        
+        // Set initial state for skill categories
+        skillCategories.forEach(category => {
+            category.style.opacity = '0';
+            category.style.transform = 'translateY(20px)';
+            category.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        // Trigger animations on load and scroll
+        window.addEventListener('load', animateSkills);
+        window.addEventListener('scroll', animateSkills);
     </script>
 </body>
 </html>

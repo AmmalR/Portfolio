@@ -8,12 +8,25 @@
     <style>
         /* Global Styles - Consistent with Portfolio */
         :root {
+            /* Dark Mode Colors (Original) */
             --primary-color: #4da6ff;
             --secondary-color: #36454F;
             --dark-color: #1a1a1a;
             --light-color: #f0f0f0;
             --accent-color: #ff6b6b;
             --card-bg: #2d3748;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Light Mode Colors - Same as Homepage */
+        body.light-mode {
+            --primary-color: #0B5884;
+            --secondary-color: #aec3d0;
+            --dark-color: #dadadb;
+            --light-color: #272a2f;
+            --accent-color: #FF9A76;
+            --card-bg: #dadadb;
+            --shadow-color: rgba(0, 0, 0, 0.08);
         }
         
         * {
@@ -27,6 +40,7 @@
             background-color: var(--dark-color);
             color: var(--light-color);
             line-height: 1.6;
+            transition: all 0.3s ease;
         }
         
         .container {
@@ -35,21 +49,43 @@
             padding: 0 20px;
         }
         
-        /* Header & Navigation - Same as Portfolio */
-        header {
+        /* Rounded Navigation Header - Same as Homepage */
+        .rounded-header {
             background-color: var(--secondary-color);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            box-shadow: 0 4px 20px var(--shadow-color);
             position: fixed;
-            width: 100%;
+            width: 94%;
+            max-width: 1150px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 100;
             transition: all 0.3s ease;
+            margin-top: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(77, 166, 255, 0.1);
+        }
+        
+        body.light-mode .rounded-header {
+            border: 1px solid rgba(44, 130, 201, 0.1);
+        }
+        
+        .rounded-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+            z-index: 1;
         }
         
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 15px 30px;
         }
         
         .logo img {
@@ -62,48 +98,81 @@
             transform: scale(1.05);
         }
         
+        /* Logo visibility control - Same as Homepage */
+        .logo-dark {
+            display: block;
+        }
+        
+        .logo-light {
+            display: none;
+        }
+        
+        body.light-mode .logo-dark {
+            display: none;
+        }
+        
+        body.light-mode .logo-light {
+            display: block;
+        }
+        
         .nav-links {
             display: flex;
             list-style: none;
+            gap: 10px;
         }
         
         .nav-links li {
-            margin-left: 30px;
+            position: relative;
         }
         
         .nav-links a {
             text-decoration: none;
             color: var(--light-color);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
+            padding: 8px 18px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
+        .nav-links a::before {
+            content: '➤';
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateX(-5px);
         }
         
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .nav-links a:hover {
             color: var(--primary-color);
+            background-color: rgba(77, 166, 255, 0.1);
+        }
+        
+        body.light-mode .nav-links a:hover {
+            background-color: rgba(44, 130, 201, 0.1);
         }
         
         .nav-links a.active {
             color: var(--primary-color);
+            background-color: rgba(77, 166, 255, 0.15);
+            font-weight: 600;
         }
         
-        .nav-links a.active::after {
-            width: 100%;
+        body.light-mode .nav-links a.active {
+            background-color: rgba(44, 130, 201, 0.15);
+        }
+        
+        .nav-links a.active::before {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .hamburger {
@@ -112,11 +181,23 @@
             color: var(--light-color);
             font-size: 1.5rem;
             transition: transform 0.3s ease;
+            background: rgba(77, 166, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+        
+        body.light-mode .hamburger {
+            background: rgba(44, 130, 201, 0.1);
         }
         
         .hamburger:hover {
             color: var(--primary-color);
             transform: rotate(90deg);
+            background: rgba(77, 166, 255, 0.2);
+        }
+        
+        body.light-mode .hamburger:hover {
+            background: rgba(44, 130, 201, 0.2);
         }
         
         /* Projects Section */
@@ -139,6 +220,10 @@
             z-index: 0;
         }
         
+        body.light-mode .projects::before {
+            background: radial-gradient(circle, rgba(44, 130, 201, 0.1) 0%, transparent 70%);
+        }
+        
         .section-header {
             text-align: center;
             margin-bottom: 50px;
@@ -153,23 +238,28 @@
             font-size: 2.5rem;
             color: var(--light-color);
             margin-bottom: 15px;
-        }
-        
-        .section-header p {
-            color: rgba(240, 240, 240, 0.7);
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
+            position: relative;
+            display: inline-block;
         }
         
         .section-header h1::after {
             content: '';
-            display: block;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 80px;
             height: 3px;
             background-color: var(--primary-color);
-            margin: 15px auto 0;
             border-radius: 3px;
+        }
+        
+        .section-header p {
+            color: var(--light-color);
+            opacity: 0.7;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
         }
         
         .filter-buttons {
@@ -191,41 +281,81 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.9rem;
+            font-weight: 500;
         }
         
-        .filter-btn:hover, .filter-btn.active {
+        .filter-btn:hover {
+            background-color: rgba(77, 166, 255, 0.1);
+        }
+        
+        .filter-btn.active {
             background-color: var(--primary-color);
             color: var(--dark-color);
         }
         
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+        body.light-mode .filter-btn.active {
+            color: var(--light-color);
+        }
+        
+        /* Project Cards Container */
+        .projects-container {
             position: relative;
             z-index: 1;
+            min-height: 500px;
+        }
+        
+        /* Regular Projects Grid */
+        .projects-grid {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .projects-grid.active {
+            display: grid;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .project-card {
             background-color: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px var(--shadow-color);
             border: 1px solid rgba(77, 166, 255, 0.1);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             opacity: 0;
             transform: translateY(20px);
+        }
+        
+        body.light-mode .project-card {
+            border: 1px solid rgba(44, 130, 201, 0.1);
         }
         
         .project-card.animate {
             opacity: 1;
             transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 40px var(--shadow-color);
             border-color: rgba(77, 166, 255, 0.3);
+        }
+        
+        body.light-mode .project-card:hover {
+            border-color: rgba(44, 130, 201, 0.3);
         }
         
         .project-image {
@@ -255,7 +385,7 @@
         }
         
         .project-tag {
-            background-color: rgba(77, 166, 255, 0.8);
+            background-color: rgba(77, 166, 255, 0.9);
             color: var(--dark-color);
             padding: 4px 12px;
             border-radius: 30px;
@@ -263,50 +393,182 @@
             font-weight: 600;
         }
         
+        body.light-mode .project-tag {
+            background-color: rgba(44, 130, 201, 0.9);
+            color: var(--light-color);
+        }
+        
         .project-content {
-            padding: 20px;
+            padding: 25px;
         }
         
         .project-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--light-color);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .project-description {
-            color: rgba(240, 240, 240, 0.7);
+            color: var(--light-color);
+            opacity: 0.8;
             font-size: 0.95rem;
             margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .project-features {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .project-features li {
+            color: var(--light-color);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .project-features li::before {
+            content: '▸';
+            position: absolute;
+            left: -15px;
+            color: var(--primary-color);
         }
         
         .project-links {
             display: flex;
             gap: 15px;
+            margin-top: 20px;
         }
         
         .project-link {
             display: inline-flex;
             align-items: center;
-            padding: 8px 20px;
+            padding: 10px 20px;
             background-color: rgba(77, 166, 255, 0.1);
             color: var(--primary-color);
-            border-radius: 5px;
+            border-radius: 8px;
             text-decoration: none;
             font-size: 0.9rem;
+            font-weight: 500;
             transition: all 0.3s ease;
             border: 1px solid rgba(77, 166, 255, 0.3);
+        }
+        
+        body.light-mode .project-link {
+            background-color: rgba(44, 130, 201, 0.1);
+            border: 1px solid rgba(44, 130, 201, 0.3);
         }
         
         .project-link:hover {
             background-color: var(--primary-color);
             color: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        body.light-mode .project-link:hover {
+            color: var(--light-color);
         }
         
         .project-link i {
             margin-right: 8px;
         }
         
-        /* Footer - Same as Portfolio */
+        /* Client Badge for Oracle Projects */
+        .client-badge {
+            display: inline-block;
+            background-color: rgba(255, 107, 107, 0.1);
+            color: var(--accent-color);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 10px;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        /* Design Gallery */
+        .design-gallery {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .design-gallery.active {
+            display: grid;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .design-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border: 1px solid rgba(77, 166, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .design-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow-color);
+            border-color: rgba(77, 166, 255, 0.3);
+        }
+        
+        .design-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .design-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .design-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .design-item:hover .design-overlay {
+            opacity: 1;
+        }
+        
+        .design-title {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        /* No Projects Message */
+        .no-projects {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--light-color);
+            opacity: 0.6;
+            font-size: 1.1rem;
+            display: none;
+            grid-column: 1 / -1;
+        }
+        
+        .no-projects i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            opacity: 0.5;
+        }
+        
+        /* Footer - Same as Homepage */
         footer {
             background-color: var(--dark-color);
             color: var(--light-color);
@@ -341,9 +603,55 @@
         }
         
         footer p {
-            color: rgba(240, 240, 240, 0.6);
+            color: var(--light-color);
+            opacity: 0.6;
             font-size: 0.9rem;
             margin-top: 20px;
+        }
+        
+        /* Theme Toggle Button - Same as Homepage */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .theme-toggle i {
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .theme-toggle:hover i {
+            transform: rotate(20deg);
+        }
+        
+        .fa-sun, .fa-moon {
+            position: absolute;
+        }
+        
+        body:not(.light-mode) .fa-moon {
+            display: none;
+        }
+        
+        body.light-mode .fa-sun {
+            display: none;
         }
         
         /* Animations */
@@ -369,13 +677,30 @@
         
         /* Responsive Design */
         @media (max-width: 992px) {
+            .rounded-header {
+                width: 96%;
+                border-radius: 30px;
+                margin-top: 10px;
+            }
+            
+            nav {
+                padding: 15px 20px;
+            }
+            
             .projects-grid {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .design-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .projects {
+                padding: 100px 0 60px;
             }
         }
         
         @media (max-width: 768px) {
-            /* Navigation */
             .nav-links {
                 display: none;
                 flex-direction: column;
@@ -385,8 +710,9 @@
                 left: 0;
                 background-color: var(--secondary-color);
                 padding: 20px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 5px 10px var(--shadow-color);
                 z-index: 99;
+                border-radius: 0 0 15px 15px;
             }
             
             .nav-links.active {
@@ -394,15 +720,17 @@
             }
             
             .nav-links li {
-                margin: 15px 0;
+                margin: 10px 0;
+            }
+            
+            .nav-links a {
+                padding: 12px 20px;
+                border-radius: 10px;
+                justify-content: flex-start;
             }
             
             .hamburger {
                 display: block;
-            }
-            
-            .projects {
-                padding: 100px 0 60px;
             }
             
             .section-header h1 {
@@ -416,27 +744,74 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .design-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .rounded-header {
+                border-radius: 20px;
+            }
+            
+            .theme-toggle {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .rounded-header {
+                border-radius: 15px;
+                width: 98%;
+                margin-top: 10px;
+            }
+            
+            nav {
+                padding: 12px 15px;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+            
+            .project-link {
+                text-align: center;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo"><img src="Logo.png" alt="logo" style="height: 40px;"></div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="projects.html" class="active">Projects</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
+    <!-- Rounded Navigation Header - Same as Homepage -->
+    <header class="rounded-header">
+        <nav>
+            <div class="logo">
+                <!-- Dark mode logo -->
+                <img src="Logo.png" alt="Ammal Raheem Logo" class="logo-dark">
+                <!-- Light mode logo -->
+                <img src="Logo light.png" alt="Ammal Raheem Logo" class="logo-light">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
     </header>
 
     <!-- Projects Section -->
@@ -444,129 +819,396 @@
         <div class="container">
             <div class="section-header">
                 <h1>My Projects</h1>
-                <p>Here are some of my recent projects showcasing my skills in web development, mobile applications, and database systems.</p>
+                <p>Explore my portfolio of professional projects organized by category.</p>
             </div>
             
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn active" data-filter="oracle">Oracle</button>
                 <button class="filter-btn" data-filter="web">Web</button>
                 <button class="filter-btn" data-filter="mobile">Mobile</button>
                 <button class="filter-btn" data-filter="database">Database</button>
+                <button class="filter-btn" data-filter="wordpress">WordPress</button>
                 <button class="filter-btn" data-filter="design">Design</button>
             </div>
             
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card" data-category="web">
-                    <div class="project-image">
-                        <img src="scents.png" alt="SCENTS Blog Website">
-                        <div class="project-tags">
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                            <span class="project-tag">JavaScript</span>
+            <div class="projects-container">
+                <!-- Oracle Projects Grid -->
+                <div class="projects-grid active" id="oracle-projects">
+                    <!-- Oracle Project 1 -->
+                    <div class="project-card" data-category="oracle">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Oracle EBS Implementation">
+                            <div class="project-tags">
+                                <span class="project-tag">Oracle EBS</span>
+                                <span class="project-tag">SQL/PLSQL</span>
+                                <span class="project-tag">Finance</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Oracle EBS - Emirat, Hail, KSA
+                                <span class="client-badge">ICM Software House</span>
+                            </h3>
+                            <p class="project-description">Full-cycle Oracle E-Business Suite implementation for a major client in Saudi Arabia, covering Financials, SCM, and HCM modules.</p>
+                            
+                            <div class="project-links">
+                                <span class="project-link" style="background-color: rgba(77, 166, 255, 0.05); cursor: default;">
+                                    <i class="fas fa-building"></i> Enterprise Project
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <h3 class="project-title">SCENTS Blog Website</h3>
-                        <p class="project-description">A web application showcasing a curated collection of scented candles and perfumes, utilizing responsive design principles to ensure optimal viewing on various devices.</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> View Code</a>
+                    
+                    <!-- Oracle Project 2 -->
+                    <div class="project-card" data-category="oracle">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1580655653885-65763b2597d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Oracle Fusion Implementation">
+                            <div class="project-tags">
+                                <span class="project-tag">Oracle Fusion</span>
+                                <span class="project-tag">Cloud</span>
+                                <span class="project-tag">ERP</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Oracle Fusion - The Arab Energy Funds
+                                <span class="client-badge">ICM Software House</span>
+                            </h3>
+                            <p class="project-description">Oracle Fusion Cloud implementation for a leading energy investment organization, modernizing their enterprise resource planning.</p>
+                            
+                            <div class="project-links">
+                                <span class="project-link" style="background-color: rgba(77, 166, 255, 0.05); cursor: default;">
+                                    <i class="fas fa-cloud"></i> Cloud Implementation
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Oracle Project 3 -->
+                    <div class="project-card" data-category="oracle">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Healthcare EBS">
+                            <div class="project-tags">
+                                <span class="project-tag">Oracle EBS</span>
+                                <span class="project-tag">Healthcare</span>
+                                <span class="project-tag">HCM</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Oracle EBS - King Khaled Eye Specialist Hospital
+                                <span class="client-badge">ICM Software House</span>
+                            </h3>
+                            <p class="project-description">Specialized Oracle EBS implementation for a prestigious eye specialist hospital, focusing on healthcare-specific customization.</p>
+                            
+                            <div class="project-links">
+                                <span class="project-link" style="background-color: rgba(77, 166, 255, 0.05); cursor: default;">
+                                    <i class="fas fa-hospital"></i> Healthcare Sector
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Oracle Project 4 -->
+                    <div class="project-card" data-category="oracle">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Delta Enterprises">
+                            <div class="project-tags">
+                                <span class="project-tag">Oracle EBS</span>
+                                <span class="project-tag">SCM</span>
+                                <span class="project-tag">Riyadh</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Oracle EBS - Delta Enterprises, Riyadh
+                                <span class="client-badge">ICM Software House</span>
+                            </h3>
+                            <p class="project-description">Enterprise resource planning implementation for Delta Enterprises, optimizing their supply chain management processes.</p>
+                           
+                            <div class="project-links">
+                                <span class="project-link" style="background-color: rgba(77, 166, 255, 0.05); cursor: default;">
+                                    <i class="fas fa-industry"></i> Enterprise Solution
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Project 2 -->
-                <div class="project-card" data-category="database">
-                    <div class="project-image">
-                        <img src="airport.jpg" alt="Airport Management System">
-                        <div class="project-tags">
-                            <span class="project-tag">MySQL</span>
-                            <span class="project-tag">Database</span>
-                            <span class="project-tag">SQL</span>
+                <!-- Web Projects Grid -->
+                <div class="projects-grid" id="web-projects">
+                    <!-- Web Project 1 -->
+                    <div class="project-card" data-category="web">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Creative Pair">
+                            <div class="project-tags">
+                                <span class="project-tag">React</span>
+                                <span class="project-tag">Tailwind CSS</span>
+                                <span class="project-tag">Netlify</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Creative Pair</h3>
+                            <p class="project-description">A modern web application built to showcase creative portfolios and innovative ideas with smooth animations and optimized performance.</p>
+                            
+                            <div class="project-links">
+                                <a href="https://www.creativepair.site" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/AmmalR/creative-pair" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Airport Management System</h3>
-                        <p class="project-description">Designed a relational database schema to efficiently store and retrieve airport data with complex SQL queries, data normalization, and security measures.</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> View Code</a>
+                    
+                    <!-- Web Project 2 -->
+                    <div class="project-card" data-category="web">
+                        <div class="project-image">
+                            <img src="scents.png" alt="SCENTS Blog">
+                            <div class="project-tags">
+                                <span class="project-tag">Figma</span>
+                                <span class="project-tag">HTML/CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">SCENTS Blog</h3>
+                            <p class="project-description">An aesthetic e-commerce style blog showcasing a curated collection of perfumes and scented candles with interactive design elements.</p>
+                            
+                            <div class="project-links">
+                                <a href="https://ammalr.github.io/Scents/" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/AmmalR/Scents" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Web Project 3 -->
+                    <div class="project-card" data-category="web">
+                        <div class="project-image">
+                            <img src="Logo.png" alt="Personal Portfolio">
+                            <div class="project-tags">
+                                <span class="project-tag">HTML</span>
+                                <span class="project-tag">CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Personal Portfolio</h3>
+                            <p class="project-description">A professional personal website highlighting my journey as an IT student and Technical Consultant with modern design and interactivity.</p>
+                            
+                            <div class="project-links">
+                                <a href="https://ammalr.github.io/Portfolio/" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/AmmalR/Portfolio" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Web Project 4 -->
+                    <div class="project-card" data-category="web">
+                        <div class="project-image">
+                            <img src="Botanica.jpg" alt="BotanicaOrganica">
+                            <div class="project-tags">
+                                <span class="project-tag">HTML</span>
+                                <span class="project-tag">CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">BotanicaOrganica</h3>
+                            <p class="project-description">A website dedicated to plant information and growth procedures, featuring interactive elements and botanical resources.</p>
+                            
+                            <div class="project-links">
+                                <a href="https://github.com/AmmalR/BotanicaOrganica" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Project 3 -->
-                <div class="project-card" data-category="database">
-                    <div class="project-image">
-                        <img src="library.jpg" alt="Library Management System">
-                        <div class="project-tags">
-                            <span class="project-tag">C++</span>
-                            <span class="project-tag">Data Structures</span>
+                <!-- Mobile Projects Grid -->
+                <div class="projects-grid" id="mobile-projects">
+                    <!-- Mobile Project -->
+                    <div class="project-card" data-category="mobile">
+                        <div class="project-image">
+                            <img src="CWF.png" alt="Care Without Fear">
+                            <div class="project-tags">
+                                <span class="project-tag">Android</span>
+                                <span class="project-tag">Java</span>
+                                <span class="project-tag">Firebase</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Library Management System</h3>
-                        <p class="project-description">Implemented data structures (arrays, linked lists) to store and organize library data with algorithms for searching, sorting, and managing records.</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> View Code</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 4 -->
-                <div class="project-card" data-category="design">
-                    <div class="project-image">
-                        <img src="marketing.png" alt="Marketing Materials">
-                        <div class="project-tags">
-                            <span class="project-tag">Graphic Design</span>
-                            <span class="project-tag">Figma</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Marketing Materials</h3>
-                        <p class="project-description">Created visually appealing marketing materials and social media content that effectively communicated brand messages during my internship.</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> View Designs</a>
+                        <div class="project-content">
+                            <h3 class="project-title">Care Without Fear</h3>
+                            <p class="project-description">A comprehensive Android application designed to digitalize and streamline healthcare and childcare services in Pakistan.</p>
+                            
+                            <div class="project-links">
+                                <a href="https://github.com/AmmalR/CareWithoutFear" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Project 5 -->
-                <div class="project-card" data-category="web">
-                    <div class="project-image">
-                        <img src="portfolio.png" alt="Portfolio Website">
-                        <div class="project-tags">
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                            <span class="project-tag">JavaScript</span>
+                <!-- Database Projects Grid -->
+                <div class="projects-grid" id="database-projects">
+                    <!-- Database Project 1 -->
+                    <div class="project-card" data-category="database">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Airport Management System">
+                            <div class="project-tags">
+                                <span class="project-tag">MySQL</span>
+                                <span class="project-tag">Database</span>
+                                <span class="project-tag">Normalization</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Airport Management System</h3>
+                            <p class="project-description">A backend database system focused on efficient storage and retrieval of flight and passenger data with complex query capabilities.</p>
+                            
+                            <div class="project-links">
+                                <a href="https://github.com/AmmalR/Airport-Management-System" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Portfolio Website</h3>
-                        <p class="project-description">A responsive portfolio website showcasing my skills, projects, and professional experience with modern design and interactive elements.</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> View Code</a>
+                    
+                    <!-- Database Project 2 -->
+                    <div class="project-card" data-category="database">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Library Management System">
+                            <div class="project-tags">
+                                <span class="project-tag">C++</span>
+                                <span class="project-tag">Data Structures</span>
+                                <span class="project-tag">Algorithms</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Library Management System</h3>
+                            <p class="project-description">A software solution for managing book records, member registrations, and library inventory with efficient data structures.</p>
+                            
+                            <div class="project-links">
+                                <a href="https://github.com/AmmalR/Library-Management-System" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Project 6 -->
-                <div class="project-card" data-category="mobile">
-                    <div class="project-image">
-                        <img src="CWF.png" alt="Android Application">
-                        <div class="project-tags">
-                            <span class="project-tag">Android</span>
-                            <span class="project-tag">Java</span>
+                <!-- WordPress Projects Grid -->
+                <div class="projects-grid" id="wordpress-projects">
+                    <!-- WordPress Project 1 -->
+                    <div class="project-card" data-category="wordpress">
+                        <div class="project-image">
+                            <img src="suplead.png" alt="Supead Company">
+                            <div class="project-tags">
+                                <span class="project-tag">WordPress</span>
+                                <span class="project-tag">Multilingual</span>
+                                <span class="project-tag">Corporate</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Supead Company Website</h3>
+                            <p class="project-description">A multilingual corporate website for Supead Company, focusing on professional service presentation across multiple regions.</p>
+                            <div class="project-links">
+                                <a href="https://www.supeadsa.com" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Website
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Care Without Fear</h3>
-                        <p class="project-description">A mobile application for digitaliging health and child care in Pakistan. to hire caregivers (Nurses, Physiotherapists, Babysitters) and make a secure platform foor both caregiver and clients.</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> View Code</a>
+                    
+                    <!-- WordPress Project 2 -->
+                    <div class="project-card" data-category="wordpress">
+                        <div class="project-image">
+                            <img src="ICM.jpg" alt="ICM Software House">
+                            <div class="project-tags">
+                                <span class="project-tag">WordPress</span>
+                                <span class="project-tag">Multi-site</span>
+                                <span class="project-tag">Global</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">ICM Software House Global Sites</h3>
+                            <p class="project-description">A global multi-site deployment for ICM Software House operating across Saudi Arabia, UK, USA, Canada, and Pakistan.</p>
+                            
+                            <div class="project-links">
+                                <a href="https://www.icmsh.us" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> USA Site
+                                </a>
+                                <a href="https://www.icm-pak.com" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Pakistan Site
+                                </a>
+                            </div>
                         </div>
                     </div>
+                </div>
+                
+                <!-- Design Gallery -->
+                <div class="design-gallery" id="design-gallery">
+                    <!-- Design Images - 12 items -->
+                    <div class="design-item">
+                        <img src="2.PNG" alt="Design 1">
+                        <div class="design-overlay">
+                            <div class="design-title"></div>
+                        </div>
+                    </div>
+                    <div class="design-item">
+                        <img src="3.PNG" alt="Design 2">
+                        <div class="design-overlay">
+                            <div class="design-title"></div>
+                        </div>
+                    </div>
+                    <div class="design-item">
+                        <img src="4.PNG" alt="Design 3">
+                        <div class="design-overlay">
+                            <div class="design-title"></div>
+                        </div>
+                    </div>
+                    <div class="design-item">
+                        <img src="1.PNG" alt="Design 4">
+                        <div class="design-overlay">
+                            <div class="design-title"></div>
+                        </div>
+                    </div>
+                    <div class="design-item">
+                        <img src="5.png" alt="Design 5">
+                        <div class="design-overlay">
+                            <div class="design-title"></div>
+                        </div>
+                    </div>
+                    <div class="design-item">
+                        <img src="6.png" alt="Design 6">
+                        <div class="design-overlay">
+                            <div class="design-title"></div>
+                        </div>
+                    </div>
+                    <div class="design-item">
+                        <img src="7.png" alt="Design 7">
+                        <div class="design-overlay">
+                            <div class="design-title">Brand Identity 2</div>
+                        </div>
+                    </div>
+                    <div class="design-item">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Design 8">
+                        <div class="design-overlay">
+                            <div class="design-title">UI/UX Design 1</div>
+                        </div>
+                    </div>
+                    
+                <!-- No Projects Message -->
+                <div class="no-projects" id="no-projects">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>No Projects Found</h3>
+                    <p>There are no projects in this category at the moment.</p>
                 </div>
             </div>
         </div>
@@ -580,12 +1222,18 @@
                 <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/"><i class="fab fa-linkedin"></i></a>
                 <a href="https://www.instagram.com/not_ar02?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
             </div>
-            <p>&copy; 2025 Ammal Raheem. All rights reserved.</p>
+            <p>&copy; 2026 Ammal Raheem. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Theme Toggle Button - Same as Homepage -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </div>
+
     <script>
-        // Mobile Navigation Toggle
+        // Mobile Navigation Toggle - Same as Homepage
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         
@@ -602,22 +1250,72 @@
             });
         });
         
-        // Change navbar style on scroll
+        // Change navbar style on scroll - Same as Homepage
         window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
+            const header = document.querySelector('.rounded-header');
             if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
-                header.style.padding = '10px 0';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+                header.style.width = '100%';
+                header.style.borderRadius = '0 0 20px 20px';
+                header.style.marginTop = '0';
             } else {
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
-                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
+                if (window.innerWidth > 768) {
+                    header.style.width = '94%';
+                    header.style.borderRadius = '50px';
+                    header.style.marginTop = '20px';
+                } else if (window.innerWidth > 480) {
+                    header.style.width = '96%';
+                    header.style.borderRadius = '30px';
+                    header.style.marginTop = '10px';
+                } else {
+                    header.style.width = '98%';
+                    header.style.borderRadius = '15px';
+                    header.style.marginTop = '10px';
+                }
             }
         });
         
-        // Project filtering
+        // Project filtering without "All" tab
         const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectCards = document.querySelectorAll('.project-card');
+        const projectGrids = {
+            'oracle': document.getElementById('oracle-projects'),
+            'web': document.getElementById('web-projects'),
+            'mobile': document.getElementById('mobile-projects'),
+            'database': document.getElementById('database-projects'),
+            'wordpress': document.getElementById('wordpress-projects'),
+            'design': document.getElementById('design-gallery')
+        };
         
+        // Function to show a specific category
+        function showCategory(category) {
+            // Hide all grids
+            Object.values(projectGrids).forEach(grid => {
+                if (grid) {
+                    grid.classList.remove('active');
+                    grid.style.display = 'none';
+                }
+            });
+            
+            // Show the selected grid
+            if (projectGrids[category]) {
+                projectGrids[category].style.display = 'grid';
+                setTimeout(() => {
+                    projectGrids[category].classList.add('active');
+                    animateProjectCards(projectGrids[category]);
+                }, 50);
+            }
+            
+            // Show/hide no projects message
+            const noProjectsMsg = document.getElementById('no-projects');
+            if (projectGrids[category] && projectGrids[category].querySelector('.project-card, .design-item')) {
+                noProjectsMsg.style.display = 'none';
+            } else {
+                noProjectsMsg.style.display = 'block';
+            }
+        }
+        
+        // Add event listeners to filter buttons
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 // Update active button
@@ -625,35 +1323,80 @@
                 button.classList.add('active');
                 
                 const filterValue = button.getAttribute('data-filter');
-                
-                // Filter projects
-                projectCards.forEach(card => {
-                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+                showCategory(filterValue);
             });
         });
         
-        // Animate project cards on scroll
-        const animateOnScroll = () => {
-            projectCards.forEach((card, index) => {
-                const cardPosition = card.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if (cardPosition < screenPosition) {
-                    setTimeout(() => {
-                        card.classList.add('animate');
-                    }, index * 150);
-                }
-            });
-        };
+        // Initialize with Oracle projects shown
+        showCategory('oracle');
         
-        // Set initial state for animation
-        window.addEventListener('load', animateOnScroll);
-        window.addEventListener('scroll', animateOnScroll);
+        // Animate project cards
+        function animateProjectCards(container) {
+            const cards = container.querySelectorAll('.project-card, .design-item');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate');
+                }, index * 100);
+            });
+        }
+        
+        // Animate initial cards
+        setTimeout(() => {
+            animateProjectCards(document.querySelector('.projects-grid.active'));
+        }, 500);
+        
+        // Theme Toggle Functionality with logo switching
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            switchLogos(true); // Switch to light mode logos
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const isLightMode = document.body.classList.toggle('light-mode');
+            
+            // Switch logos based on mode
+            switchLogos(isLightMode);
+            
+            // Save preference
+            const currentTheme = isLightMode ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+        });
+        
+        // Function to switch logos
+        function switchLogos(isLightMode) {
+            const logoDark = document.querySelector('.logo-dark');
+            const logoLight = document.querySelector('.logo-light');
+            
+            if (isLightMode) {
+                // Switch to light mode
+                if (logoDark) logoDark.style.display = 'none';
+                if (logoLight) logoLight.style.display = 'block';
+            } else {
+                // Switch to dark mode
+                if (logoDark) logoDark.style.display = 'block';
+                if (logoLight) logoLight.style.display = 'none';
+            }
+        }
+        
+        // Initialize header style on load
+        window.dispatchEvent(new Event('scroll'));
+        
+        // Add hover effect to project cards
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('.project-card')) {
+                e.target.closest('.project-card').style.zIndex = '10';
+            }
+        });
+        
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest('.project-card')) {
+                e.target.closest('.project-card').style.zIndex = '1';
+            }
+        });
     </script>
 </body>
 </html>
