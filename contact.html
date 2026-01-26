@@ -199,6 +199,13 @@
         body.light-mode .hamburger:hover {
             background: rgba(44, 130, 201, 0.2);
         }
+        .hamburger.active {
+    transform: rotate(90deg);
+}
+
+.hamburger.active i {
+    transform: rotate(180deg);
+}
         
         /* Contact Section */
         .contact {
@@ -834,19 +841,32 @@
 
     <script>
         // Mobile Navigation Toggle - Same as Homepage
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const hamburgerIcon = hamburger.querySelector('i');
+
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+    
+            // Toggle between hamburger and X icon
+            if (navLinks.classList.contains('active')) {
+                hamburgerIcon.classList.remove('fa-bars');
+                hamburgerIcon.classList.add('fa-times');
+                hamburger.style.transform = 'rotate(90deg)';
+            } else {
+                hamburgerIcon.classList.remove('fa-times');
+                hamburgerIcon.classList.add('fa-bars');
+                hamburger.style.transform = 'rotate(0deg)';
+            }
         });
-        
+
         // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
+                hamburgerIcon.classList.remove('fa-times');
+                hamburgerIcon.classList.add('fa-bars');
+                hamburger.style.transform = 'rotate(0deg)';
             });
         });
         
