@@ -6,119 +6,158 @@
     <title>Ammal Raheem | Contact</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Global Styles - Consistent with Homepage */
         :root {
+            /* Dark Mode (default) */
             --primary-color: #4da6ff;
             --secondary-color: #36454F;
             --dark-color: #1a1a1a;
             --light-color: #f0f0f0;
             --accent-color: #ff6b6b;
             --card-bg: #2d3748;
+            --shadow-color: rgba(0, 0, 0, 0.3);
         }
-        
+
+        body.light-mode {
+            /* Light Mode */
+            --primary-color: #0B5884;
+            --secondary-color: #aec3d0;
+            --dark-color: #dadadb;
+            --light-color: #272a2f;
+            --accent-color: #FF9A76;
+            --card-bg: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: var(--dark-color);
             color: var(--light-color);
             line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
-        /* Header & Navigation - Same as Homepage */
-        header {
+
+        /* Rounded Header */
+        .rounded-header {
             background-color: var(--secondary-color);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            box-shadow: 0 4px 20px var(--shadow-color);
             position: fixed;
-            width: 100%;
+            width: 94%;
+            max-width: 1150px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 100;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            margin-top: 20px;
+            border: 1px solid rgba(77, 166, 255, 0.1);
         }
-        
+
+        body.light-mode .rounded-header {
+            border: 1px solid rgba(44, 130, 201, 0.1);
+        }
+
+        .rounded-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+            z-index: 1;
+        }
+
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 15px 30px;
         }
-        
+
         .logo img {
             height: 40px;
             width: auto;
             transition: transform 0.3s ease;
         }
-        
+
         .logo img:hover {
             transform: scale(1.05);
         }
-        
+
+        .logo-dark { display: block; }
+        .logo-light { display: none; }
+
+        body.light-mode .logo-dark { display: none; }
+        body.light-mode .logo-light { display: block; }
+
         .nav-links {
             display: flex;
             list-style: none;
+            gap: 10px;
         }
-        
+
         .nav-links li {
-            margin-left: 30px;
+            position: relative;
         }
-        
+
         .nav-links a {
             text-decoration: none;
             color: var(--light-color);
             font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
+            transition: all 0.3s;
+            padding: 8px 18px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
+
         .nav-links a:hover {
             color: var(--primary-color);
+            background-color: rgba(77, 166, 255, 0.1);
         }
-        
+
+        body.light-mode .nav-links a:hover {
+            background-color: rgba(44, 130, 201, 0.1);
+        }
+
         .nav-links a.active {
             color: var(--primary-color);
+            background-color: rgba(77, 166, 255, 0.15);
+            font-weight: 600;
         }
-        
-        .nav-links a.active::after {
-            width: 100%;
+
+        body.light-mode .nav-links a.active {
+            background-color: rgba(44, 130, 201, 0.15);
         }
-        
+
         .hamburger {
             display: none;
             cursor: pointer;
             color: var(--light-color);
             font-size: 1.5rem;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 8px;
         }
-        
+
         .hamburger:hover {
             color: var(--primary-color);
             transform: rotate(90deg);
         }
-        
+
         /* Contact Section */
         .contact {
             padding: 120px 0 80px;
@@ -127,7 +166,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .contact::before {
             content: '';
             position: absolute;
@@ -139,29 +178,31 @@
             animation: pulse 15s infinite linear;
             z-index: 0;
         }
-        
+
+        body.light-mode .contact::before {
+            background: radial-gradient(circle, rgba(44, 130, 201, 0.1) 0%, transparent 70%);
+        }
+
         .contact-content {
             display: flex;
             justify-content: space-between;
             position: relative;
             z-index: 1;
+            gap: 40px;
         }
-        
+
         .contact-info {
             flex: 1;
-            padding-right: 50px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease forwards 0.5s;
+            padding-right: 40px;
         }
-        
+
         .contact-info h2 {
             font-size: 2.5rem;
             margin-bottom: 30px;
             color: var(--light-color);
             position: relative;
         }
-        
+
         .contact-info h2::after {
             content: '';
             position: absolute;
@@ -170,273 +211,306 @@
             width: 80px;
             height: 3px;
             background-color: var(--primary-color);
-            border-radius: 3px;
         }
-        
-        .contact-info p {
-            margin-bottom: 30px;
-            color: rgba(240, 240, 240, 0.8);
-            font-size: 1.1rem;
-            max-width: 500px;
-        }
-        
-        .contact-details {
-            margin-top: 40px;
-        }
-        
-        .contact-item {
+
+        .contact-details .contact-item {
             display: flex;
             align-items: center;
             margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(77, 166, 255, 0.05);
+            border: 1px solid rgba(77, 166, 255, 0.1);
+            transition: all 0.3s ease;
         }
-        
+
+        body.light-mode .contact-item {
+            background: rgba(44, 130, 201, 0.05);
+            border-color: rgba(44, 130, 201, 0.1);
+        }
+
+        .contact-item:hover {
+            transform: translateX(8px);
+            background: rgba(77, 166, 255, 0.12);
+            border-color: rgba(77, 166, 255, 0.3);
+        }
+
         .contact-icon {
             width: 50px;
             height: 50px;
-            background-color: rgba(77, 166, 255, 0.1);
+            background: rgba(77, 166, 255, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 20px;
             color: var(--primary-color);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
+            font-size: 1.3rem;
+            transition: all 0.3s;
         }
-        
+
         .contact-item:hover .contact-icon {
-            background-color: var(--primary-color);
+            background: var(--primary-color);
             color: var(--dark-color);
             transform: scale(1.1);
         }
-        
+
         .contact-text h3 {
             font-size: 1.2rem;
-            margin-bottom: 5px;
-            color: var(--light-color);
+            margin-bottom: 6px;
         }
-        
+
         .contact-text a, .contact-text span {
-            color: rgba(240, 240, 240, 0.7);
+            color: var(--light-color);
+            opacity: 0.85;
             text-decoration: none;
-            transition: color 0.3s ease;
         }
-        
+
         .contact-text a:hover {
             color: var(--primary-color);
+            opacity: 1;
         }
-        
+
         /* Contact Form */
         .contact-form {
             flex: 1;
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(77, 166, 255, 0.2);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease forwards 0.8s;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px var(--shadow-color);
+            border: 1px solid rgba(77, 166, 255, 0.15);
+            transition: all 0.4s ease;
         }
-        
+
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: var(--light-color);
             font-weight: 500;
+            color: var(--light-color);
         }
-        
+
         .form-control {
             width: 100%;
-            padding: 12px 15px;
-            background-color: rgba(240, 240, 240, 0.1);
-            border: 1px solid rgba(77, 166, 255, 0.3);
-            border-radius: 5px;
+            padding: 14px 16px;
+            background: rgba(240, 240, 240, 0.08);
+            border: 1px solid rgba(77, 166, 255, 0.25);
+            border-radius: 10px;
             color: var(--light-color);
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
-        
+
+        body.light-mode .form-control {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(44, 130, 201, 0.25);
+        }
+
         .form-control:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(77, 166, 255, 0.2);
-            background-color: rgba(240, 240, 240, 0.15);
+            box-shadow: 0 0 0 4px rgba(77, 166, 255, 0.18);
+            background: rgba(240, 240, 240, 0.12);
         }
-        
+
         textarea.form-control {
-            min-height: 150px;
+            min-height: 160px;
             resize: vertical;
         }
-        
+
         .submit-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--primary-color);
+            padding: 14px 32px;
+            background: var(--primary-color);
             color: var(--dark-color);
             border: none;
-            border-radius: 5px;
-            font-size: 1rem;
+            border-radius: 10px;
+            font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(77, 166, 255, 0.3);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(77, 166, 255, 0.3);
         }
-        
+
         .submit-btn:hover {
-            background-color: var(--light-color);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(77, 166, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(77, 166, 255, 0.4);
+            background: var(--light-color);
         }
-        
-        .submit-btn:active {
-            transform: translateY(1px);
-        }
-        
-        /* Footer - Same as Homepage */
+
+        /* Footer */
         footer {
-            background-color: var(--dark-color);
+            background: var(--dark-color);
             color: var(--light-color);
-            padding: 40px 0 20px;
+            padding: 50px 0 30px;
             text-align: center;
-            position: relative;
         }
-        
-        .social-links {
-            margin-bottom: 25px;
-        }
-        
+
         .social-links a {
-            display: inline-flex;
+            width: 44px;
+            height: 44px;
+            background: var(--secondary-color);
+            color: var(--light-color);
+            font-size: 1.3rem;
+            margin: 0 12px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            color: var(--dark-color);
+            transform: translateY(-4px) rotate(8deg);
+        }
+
+        footer p {
+            margin-top: 25px;
+            opacity: 0.65;
+            font-size: 0.95rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: var(--dark-color);
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--secondary-color);
-            color: var(--light-color);
-            font-size: 1.2rem;
-            margin: 0 10px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            text-decoration: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: all 0.3s;
+            border: none;
         }
-        
-        .social-links a:hover {
-            background-color: var(--primary-color);
-            color: var(--dark-color);
-            transform: translateY(-5px) rotate(10deg);
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
         }
-        
-        footer p {
-            color: rgba(240, 240, 240, 0.6);
-            font-size: 0.9rem;
-            margin-top: 20px;
-        }
-        
+
+        body:not(.light-mode) .fa-moon { display: none; }
+        body.light-mode .fa-sun { display: none; }
+
         /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(25px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-        
+
         @keyframes pulse {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        
-        /* Responsive Design */
+
+        /* ────────────────────────────────────────────────
+           Responsive
+        ───────────────────────────────────────────────── */
+
         @media (max-width: 992px) {
             .contact-content {
                 flex-direction: column;
+                gap: 60px;
             }
-            
             .contact-info {
                 padding-right: 0;
-                margin-bottom: 50px;
             }
-            
             .contact-form {
-                width: 100%;
-                max-width: 600px;
+                max-width: 680px;
                 margin: 0 auto;
             }
         }
-        
+
         @media (max-width: 768px) {
-            /* Navigation - Same as Homepage */
+            .rounded-header {
+                width: 96%;
+                border-radius: 30px;
+                margin-top: 12px;
+            }
+
+            nav {
+                padding: 15px 20px;
+            }
+
             .nav-links {
                 display: none;
                 flex-direction: column;
                 width: 100%;
                 position: absolute;
-                top: 70px;
+                top: 80px;
                 left: 0;
-                background-color: var(--secondary-color);
-                padding: 20px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                background: var(--secondary-color);
+                padding: 25px 20px;
+                box-shadow: 0 8px 20px var(--shadow-color);
                 z-index: 99;
+                border-radius: 0 0 20px 20px;
             }
-            
+
             .nav-links.active {
                 display: flex;
             }
-            
+
             .nav-links li {
-                margin: 15px 0;
+                margin: 12px 0;
             }
-            
+
+            .nav-links a {
+                padding: 12px 24px;
+                font-size: 1.1rem;
+            }
+
             .hamburger {
                 display: block;
             }
-            
+
             .contact {
                 padding: 100px 0 60px;
             }
-            
+
             .contact-info h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
-            
+
             .contact-form {
-                padding: 30px;
+                padding: 35px;
+            }
+
+            .theme-toggle {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo"><img src="Logo.png" alt="logo" style="height: 40px;"></div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="contact.html" class="active">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
+
+    <!-- Rounded Navigation Header -->
+    <header class="rounded-header">
+        <nav>
+            <div class="logo">
+                <img src="Logo.png" alt="Ammal Raheem Logo" class="logo-dark">
+                <img src="Logo light.png" alt="Ammal Raheem Logo" class="logo-light">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
     </header>
 
     <!-- Contact Section -->
@@ -446,32 +520,26 @@
                 <div class="contact-info">
                     <h2>Get In Touch</h2>
                     <p>Have a project in mind or want to discuss potential opportunities? Feel free to reach out through the form or directly via my contact details below.</p>
-                    
+
                     <div class="contact-details">
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                             <div class="contact-text">
                                 <h3>Email</h3>
                                 <a href="mailto:ammalraheem14@gmail.com">ammalraheem14@gmail.com</a>
                             </div>
                         </div>
-                        
+
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
                             <div class="contact-text">
                                 <h3>Phone</h3>
                                 <a href="tel:+923274968541">+92 327 4968541</a>
                             </div>
                         </div>
-                        
+
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                             <div class="contact-text">
                                 <h3>Location</h3>
                                 <span>Lahore, Pakistan</span>
@@ -479,29 +547,25 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="contact-form">
                     <form id="contactForm" action="#" method="POST">
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" class="form-control" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="email">Your Email</label>
                             <input type="email" id="email" name="email" class="form-control" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="subject">Subject</label>
                             <input type="text" id="subject" name="subject" class="form-control" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="message">Your Message</label>
                             <textarea id="message" name="message" class="form-control" required></textarea>
                         </div>
-                        
                         <button type="submit" class="submit-btn">Send Message</button>
                     </form>
                 </div>
@@ -515,61 +579,69 @@
             <div class="social-links">
                 <a href="https://github.com/AmmalR"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.instagram.com/not_ar02?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/not_ar02"><i class="fab fa-instagram"></i></a>
             </div>
-            <p>&copy; 2025 Ammal Raheem. All rights reserved.</p>
+            <p>© 2025 Ammal Raheem. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </button>
+
     <script>
-        // Mobile Navigation Toggle
+        // ── Mobile Menu (unchanged – working as you confirmed) ──
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
-        
+
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             hamburger.classList.toggle('active');
         });
-        
-        // Close mobile menu when clicking a link
+
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
                 hamburger.classList.remove('active');
             });
         });
-        
-        // Change navbar style on scroll
+
+        // ── Scroll header effect ──
         window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
+            const header = document.querySelector('.rounded-header');
             if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
-                header.style.padding = '10px 0';
+                header.style.boxShadow = '0 6px 25px var(--shadow-color)';
+                header.style.width = '100%';
+                header.style.borderRadius = '0';
+                header.style.marginTop = '0';
+                header.style.padding = '12px 0';
             } else {
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
-                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 4px 20px var(--shadow-color)';
+                header.style.width = '94%';
+                header.style.borderRadius = '50px';
+                header.style.marginTop = '20px';
+                header.style.padding = '15px 30px';
             }
         });
-        
-        // Form submission handling
-        const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Here you would typically send the form data to a server
-            // For demonstration, we'll just show an alert
-            alert(`Thank you, ${name}! Your message has been sent. I'll get back to you soon at ${email}.`);
-            
-            // Reset the form
-            contactForm.reset();
+
+        // ── Theme Toggle + Logo Switching ──
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
+
+        // Trigger scroll handler once on load
+        window.dispatchEvent(new Event('scroll'));
     </script>
 </body>
 </html>
