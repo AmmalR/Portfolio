@@ -633,7 +633,10 @@
             }
         }
         
-        /* Responsive Design */
+        /* ────────────────────────────────────────────────
+   Responsive Design – only ONE block needed
+───────────────────────────────────────────────── */
+
 @media (max-width: 992px) {
     .rounded-header {
         width: 96%;
@@ -666,11 +669,11 @@
 
 @media (max-width: 768px) {
     .nav-links {
-        display: none;
+        display: none;                     /* hidden by default on mobile */
         flex-direction: column;
         width: 100%;
         position: fixed;
-        top: 80px; /* Adjusted for rounded header */
+        top: 80px;                         /* must match header height + margin */
         left: 0;
         background-color: var(--secondary-color);
         padding: 20px;
@@ -680,7 +683,7 @@
     }
     
     .nav-links.active {
-        display: flex;
+        display: flex;                     /* ← this is what shows the menu */
     }
     
     .nav-links li {
