@@ -24,7 +24,7 @@
             --dark-color: #dadadb;
             --light-color: #272a2f;
             --accent-color: #FF9A76;
-            --card-bg: #dadadb;
+            --card-bg: #ffffff;
             --shadow-color: rgba(0, 0, 0, 0.08);
         }
 
@@ -39,7 +39,7 @@
             background-color: var(--dark-color);
             color: var(--light-color);
             line-height: 1.6;
-            transition: all 0.3s ease;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         .container {
@@ -48,7 +48,7 @@
             padding: 0 20px;
         }
 
-        /* ── Rounded Header (exactly matching homepage) ── */
+        /* Rounded Header */
         .rounded-header {
             background-color: var(--secondary-color);
             border-radius: 50px;
@@ -59,7 +59,7 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             margin-top: 20px;
             overflow: hidden;
             border: 1px solid rgba(77, 166, 255, 0.1);
@@ -85,6 +85,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 30px;
+            position: relative;
         }
 
         .logo img {
@@ -118,6 +119,7 @@
             color: var(--light-color);
             font-weight: 500;
             transition: all 0.3s;
+            position: relative;
             padding: 8px 18px;
             border-radius: 20px;
             display: flex;
@@ -167,28 +169,17 @@
             cursor: pointer;
             color: var(--light-color);
             font-size: 1.5rem;
-            transition: transform 0.3s ease;
-            background: rgba(77, 166, 255, 0.1);
+            transition: all 0.3s ease;
             padding: 8px 12px;
             border-radius: 8px;
-            z-index: 101;
-        }
-
-        body.light-mode .hamburger {
-            background: rgba(44, 130, 201, 0.1);
         }
 
         .hamburger:hover {
             color: var(--primary-color);
             transform: rotate(90deg);
-            background: rgba(77, 166, 255, 0.2);
         }
 
-        body.light-mode .hamburger:hover {
-            background: rgba(44, 130, 201, 0.2);
-        }
-
-        /* ── Contact Section ── */
+        /* Contact Section */
         .contact {
             padding: 120px 0 80px;
             min-height: 100vh;
@@ -223,9 +214,7 @@
 
         .contact-info {
             flex: 1;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease forwards 0.5s;
+            padding-right: 40px;
         }
 
         .contact-info h2 {
@@ -243,79 +232,59 @@
             width: 80px;
             height: 3px;
             background-color: var(--primary-color);
-            border-radius: 3px;
         }
 
-        .contact-info p {
-            margin-bottom: 30px;
-            color: var(--light-color);
-            opacity: 0.8;
-            font-size: 1.1rem;
-            max-width: 500px;
-        }
-
-        .contact-details {
-            margin-top: 40px;
-        }
-
-        .contact-item {
+        .contact-details .contact-item {
             display: flex;
             align-items: center;
             margin-bottom: 25px;
-            transition: transform 0.3s ease;
             padding: 15px;
             border-radius: 10px;
-            background-color: rgba(77, 166, 255, 0.05);
+            background: rgba(77, 166, 255, 0.05);
             border: 1px solid rgba(77, 166, 255, 0.1);
+            transition: all 0.3s ease;
         }
 
         body.light-mode .contact-item {
-            background-color: rgba(44, 130, 201, 0.05);
-            border: 1px solid rgba(44, 130, 201, 0.1);
+            background: rgba(44, 130, 201, 0.05);
+            border-color: rgba(44, 130, 201, 0.1);
         }
 
         .contact-item:hover {
-            transform: translateX(10px);
-            background-color: rgba(77, 166, 255, 0.1);
+            transform: translateX(8px);
+            background: rgba(77, 166, 255, 0.12);
             border-color: rgba(77, 166, 255, 0.3);
-        }
-
-        body.light-mode .contact-item:hover {
-            background-color: rgba(44, 130, 201, 0.1);
-            border-color: rgba(44, 130, 201, 0.3);
         }
 
         .contact-icon {
             width: 50px;
             height: 50px;
-            background-color: rgba(77, 166, 255, 0.1);
+            background: rgba(77, 166, 255, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 20px;
             color: var(--primary-color);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
+            font-size: 1.3rem;
+            transition: all 0.3s;
         }
 
         .contact-item:hover .contact-icon {
-            background-color: var(--primary-color);
+            background: var(--primary-color);
             color: var(--dark-color);
             transform: scale(1.1);
         }
 
         .contact-text h3 {
             font-size: 1.2rem;
-            margin-bottom: 5px;
-            color: var(--light-color);
+            margin-bottom: 6px;
         }
 
         .contact-text a, .contact-text span {
             color: var(--light-color);
-            opacity: 0.8;
+            opacity: 0.85;
             text-decoration: none;
-            transition: all 0.3s ease;
         }
 
         .contact-text a:hover {
@@ -323,254 +292,137 @@
             opacity: 1;
         }
 
-        /* Social Links in Contact Info */
-        .contact-social {
-            margin-top: 40px;
-        }
-
-        .contact-social h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--light-color);
-        }
-
-        .contact-social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .contact-social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            background-color: var(--secondary-color);
-            color: var(--light-color);
-            font-size: 1.2rem;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .contact-social-links a:hover {
-            background-color: var(--primary-color);
-            color: var(--dark-color);
-            transform: translateY(-5px) rotate(10deg);
-        }
-
         /* Contact Form */
         .contact-form {
             flex: 1;
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 16px;
             box-shadow: 0 15px 40px var(--shadow-color);
-            border: 1px solid rgba(77, 166, 255, 0.2);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease forwards 0.8s;
+            border: 1px solid rgba(77, 166, 255, 0.15);
             transition: all 0.4s ease;
         }
 
-        body.light-mode .contact-form {
-            border: 1px solid rgba(44, 130, 201, 0.2);
-        }
-
-        .contact-form:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px var(--shadow-color);
-            border-color: rgba(77, 166, 255, 0.3);
-        }
-
-        body.light-mode .contact-form:hover {
-            border-color: rgba(44, 130, 201, 0.3);
-        }
-
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: var(--light-color);
             font-weight: 500;
+            color: var(--light-color);
         }
 
         .form-control {
             width: 100%;
-            padding: 12px 15px;
-            background-color: rgba(240, 240, 240, 0.1);
-            border: 1px solid rgba(77, 166, 255, 0.3);
-            border-radius: 8px;
+            padding: 14px 16px;
+            background: rgba(240, 240, 240, 0.08);
+            border: 1px solid rgba(77, 166, 255, 0.25);
+            border-radius: 10px;
             color: var(--light-color);
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
         body.light-mode .form-control {
-            background-color: rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(44, 130, 201, 0.3);
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(44, 130, 201, 0.25);
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(77, 166, 255, 0.2);
-            background-color: rgba(240, 240, 240, 0.15);
-        }
-
-        body.light-mode .form-control:focus {
-            box-shadow: 0 0 0 3px rgba(44, 130, 201, 0.2);
-            background-color: rgba(0, 0, 0, 0.08);
+            box-shadow: 0 0 0 4px rgba(77, 166, 255, 0.18);
+            background: rgba(240, 240, 240, 0.12);
         }
 
         textarea.form-control {
-            min-height: 150px;
+            min-height: 160px;
             resize: vertical;
         }
 
         .submit-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--primary-color);
+            padding: 14px 32px;
+            background: var(--primary-color);
             color: var(--dark-color);
             border: none;
-            border-radius: 5px;
-            font-size: 1rem;
+            border-radius: 10px;
+            font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(77, 166, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        body.light-mode .submit-btn {
-            box-shadow: 0 4px 15px rgba(44, 130, 201, 0.3);
+            box-shadow: 0 5px 15px rgba(77, 166, 255, 0.3);
         }
 
         .submit-btn:hover {
-            background-color: var(--light-color);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(77, 166, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(77, 166, 255, 0.4);
+            background: var(--light-color);
         }
 
-        body.light-mode .submit-btn:hover {
-            box-shadow: 0 6px 20px rgba(44, 130, 201, 0.4);
-        }
-
-        .submit-btn:active {
-            transform: translateY(1px);
-        }
-
-        /* Form Success Message */
-        .form-success {
-            display: none;
-            background-color: rgba(46, 204, 113, 0.1);
-            border: 1px solid rgba(46, 204, 113, 0.3);
-            color: #2ecc71;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-            animation: fadeInUp 0.5s ease;
-        }
-
-        .form-success.show {
-            display: block;
-        }
-
-        /* ── Footer ── */
+        /* Footer */
         footer {
-            background-color: var(--dark-color);
+            background: var(--dark-color);
             color: var(--light-color);
-            padding: 40px 0 20px;
+            padding: 50px 0 30px;
             text-align: center;
-            position: relative;
-        }
-
-        .social-links {
-            margin-bottom: 25px;
         }
 
         .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--secondary-color);
+            width: 44px;
+            height: 44px;
+            background: var(--secondary-color);
             color: var(--light-color);
-            font-size: 1.2rem;
-            margin: 0 10px;
+            font-size: 1.3rem;
+            margin: 0 12px;
             border-radius: 50%;
-            transition: all 0.3s ease;
-            text-decoration: none;
+            transition: all 0.3s;
         }
 
         .social-links a:hover {
-            background-color: var(--primary-color);
+            background: var(--primary-color);
             color: var(--dark-color);
-            transform: translateY(-5px) rotate(10deg);
+            transform: translateY(-4px) rotate(8deg);
         }
 
         footer p {
-            color: var(--light-color);
-            opacity: 0.6;
-            font-size: 0.9rem;
-            margin-top: 20px;
+            margin-top: 25px;
+            opacity: 0.65;
+            font-size: 0.95rem;
         }
 
-        /* ── Theme Toggle ── */
+        /* Theme Toggle */
         .theme-toggle {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             background: var(--primary-color);
             color: var(--dark-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             cursor: pointer;
             z-index: 1000;
-            box-shadow: 0 4px 15px var(--shadow-color);
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: all 0.3s;
             border: none;
-        }
-
-        .theme-toggle i {
-            transition: transform 0.3s ease;
         }
 
         .theme-toggle:hover {
             transform: scale(1.1);
         }
 
-        .theme-toggle:hover i {
-            transform: rotate(20deg);
-        }
+        body:not(.light-mode) .fa-moon { display: none; }
+        body.light-mode .fa-sun { display: none; }
 
-        .fa-sun, .fa-moon {
-            position: absolute;
-        }
-
-        body:not(.light-mode) .fa-moon {
-            display: none;
-        }
-
-        body.light-mode .fa-sun {
-            display: none;
-        }
-
-        /* ── Animations ── */
+        /* Animations */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(25px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
@@ -579,50 +431,47 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* ── Responsive ── */
+        /* ────────────────────────────────────────────────
+           Responsive
+        ───────────────────────────────────────────────── */
+
         @media (max-width: 992px) {
+            .contact-content {
+                flex-direction: column;
+                gap: 60px;
+            }
+            .contact-info {
+                padding-right: 0;
+            }
+            .contact-form {
+                max-width: 680px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
             .rounded-header {
                 width: 96%;
                 border-radius: 30px;
-                margin-top: 10px;
+                margin-top: 12px;
             }
 
             nav {
                 padding: 15px 20px;
             }
 
-            .contact-content {
-                flex-direction: column;
-            }
-
-            .contact-info {
-                margin-bottom: 50px;
-            }
-
-            .contact-form {
-                width: 100%;
-                max-width: 600px;
-                margin: 0 auto;
-            }
-
-            .contact {
-                padding: 100px 0 60px;
-            }
-        }
-
-        @media (max-width: 768px) {
             .nav-links {
                 display: none;
                 flex-direction: column;
                 width: 100%;
-                position: fixed;
+                position: absolute;
                 top: 80px;
                 left: 0;
-                background-color: var(--secondary-color);
-                padding: 20px;
-                box-shadow: 0 5px 10px var(--shadow-color);
+                background: var(--secondary-color);
+                padding: 25px 20px;
+                box-shadow: 0 8px 20px var(--shadow-color);
                 z-index: 99;
-                border-radius: 0 0 15px 15px;
+                border-radius: 0 0 20px 20px;
             }
 
             .nav-links.active {
@@ -630,43 +479,42 @@
             }
 
             .nav-links li {
-                margin: 10px 0;
+                margin: 12px 0;
             }
 
             .nav-links a {
-                padding: 12px 20px;
-                border-radius: 10px;
-                justify-content: flex-start;
+                padding: 12px 24px;
+                font-size: 1.1rem;
             }
 
             .hamburger {
                 display: block;
             }
 
+            .contact {
+                padding: 100px 0 60px;
+            }
+
             .contact-info h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .contact-form {
-                padding: 30px;
-            }
-
-            .rounded-header {
-                border-radius: 20px;
+                padding: 35px;
             }
 
             .theme-toggle {
-                bottom: 15px;
-                right: 15px;
-                width: 45px;
-                height: 45px;
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Rounded Navigation Header (matches homepage) -->
+    <!-- Rounded Navigation Header -->
     <header class="rounded-header">
         <nav>
             <div class="logo">
@@ -692,7 +540,7 @@
             <div class="contact-content">
                 <div class="contact-info">
                     <h2>Get In Touch</h2>
-                    <p>Have a project in mind or want to discuss potential opportunities? Feel free to reach out through the form or directly via my contact details below. I typically respond within 24 hours.</p>
+                    <p>Have a project in mind or want to discuss potential opportunities? Feel free to reach out through the form or directly via my contact details below.</p>
 
                     <div class="contact-details">
                         <div class="contact-item">
@@ -719,46 +567,27 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="contact-social">
-                        <h3>Connect with me</h3>
-                        <div class="contact-social-links">
-                            <a href="https://github.com/AmmalR" title="GitHub"><i class="fab fa-github"></i></a>
-                            <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://www.instagram.com/not_ar02" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="contact-form">
                     <form id="contactForm" action="#" method="POST">
                         <div class="form-group">
                             <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" class="form-control" required placeholder="Enter your name">
+                            <input type="text" id="name" name="name" class="form-control" required>
                         </div>
-
                         <div class="form-group">
                             <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email">
+                            <input type="email" id="email" name="email" class="form-control" required>
                         </div>
-
                         <div class="form-group">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" class="form-control" required placeholder="What is this regarding?">
+                            <input type="text" id="subject" name="subject" class="form-control" required>
                         </div>
-
                         <div class="form-group">
                             <label for="message">Your Message</label>
-                            <textarea id="message" name="message" class="form-control" required placeholder="Your message here..."></textarea>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
                         </div>
-
-                        <button type="submit" class="submit-btn">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-
-                        <div id="formSuccess" class="form-success">
-                            <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.
-                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -773,18 +602,18 @@
                 <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/"><i class="fab fa-linkedin"></i></a>
                 <a href="https://www.instagram.com/not_ar02"><i class="fab fa-instagram"></i></a>
             </div>
-            <p>© 2026 Ammal Raheem. All rights reserved.</p>
+            <p>© 2025 Ammal Raheem. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Theme Toggle -->
-    <div class="theme-toggle" id="themeToggle">
+    <button class="theme-toggle" id="themeToggle">
         <i class="fas fa-sun"></i>
         <i class="fas fa-moon"></i>
-    </div>
+    </button>
 
     <script>
-        // Mobile Navigation Toggle
+        // ── Mobile Menu (unchanged – working as you confirmed) ──
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
 
@@ -793,7 +622,6 @@
             hamburger.classList.toggle('active');
         });
 
-        // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -801,74 +629,25 @@
             });
         });
 
-        // Scroll header effect (matches homepage behavior)
+        // ── Scroll header effect ──
         window.addEventListener('scroll', () => {
             const header = document.querySelector('.rounded-header');
             if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+                header.style.boxShadow = '0 6px 25px var(--shadow-color)';
                 header.style.width = '100%';
-                header.style.borderRadius = '0 0 20px 20px';
+                header.style.borderRadius = '0';
                 header.style.marginTop = '0';
+                header.style.padding = '12px 0';
             } else {
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
-                if (window.innerWidth > 768) {
-                    header.style.width = '94%';
-                    header.style.borderRadius = '50px';
-                    header.style.marginTop = '20px';
-                } else if (window.innerWidth > 480) {
-                    header.style.width = '96%';
-                    header.style.borderRadius = '30px';
-                    header.style.marginTop = '10px';
-                } else {
-                    header.style.width = '98%';
-                    header.style.borderRadius = '15px';
-                    header.style.marginTop = '10px';
-                }
+                header.style.boxShadow = '0 4px 20px var(--shadow-color)';
+                header.style.width = '94%';
+                header.style.borderRadius = '50px';
+                header.style.marginTop = '20px';
+                header.style.padding = '15px 30px';
             }
         });
 
-        // Enhanced Form submission handling
-        const contactForm = document.getElementById('contactForm');
-        const formSuccess = document.getElementById('formSuccess');
-
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-
-            if (!name || !email || !subject || !message) {
-                alert('Please fill in all fields.');
-                return;
-            }
-
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email)) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-
-            const submitBtn = contactForm.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitBtn.disabled = true;
-
-            // Simulate sending (replace with real backend later)
-            setTimeout(() => {
-                formSuccess.classList.add('show');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                contactForm.reset();
-
-                setTimeout(() => {
-                    formSuccess.classList.remove('show');
-                }, 5000);
-            }, 1500);
-        });
-
-        // Theme Toggle + Logo Switching
+        // ── Theme Toggle + Logo Switching ──
         const themeToggle = document.getElementById('themeToggle');
         const savedTheme = localStorage.getItem('theme') || 'dark';
 
@@ -877,11 +656,12 @@
         }
 
         themeToggle.addEventListener('click', () => {
-            const isLightMode = document.body.classList.toggle('light-mode');
-            localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
 
-        // Initialize header on load
+        // Trigger scroll handler once on load
         window.dispatchEvent(new Event('scroll'));
     </script>
 </body>
