@@ -112,38 +112,47 @@
             revealTargets.forEach((el) => observer.observe(el));
         }
     }
+    // ===================================================================
+    // Sticky stacking cards — services, work experience, projects.
+    // Each group stacks independently (no shared z-index/top math).
+    // ===================================================================
+    const initStackGroup = (selector) => {
+        const wraps = [...document.querySelectorAll(selector)];
+        if (wraps.length < 2) return null;
 
-    // ===================================================================
-    // Services — sticky stacking cards (dim/scale a card once the next
-    // one has fully covered it)
-    // ===================================================================
-    const serviceWraps = [...document.querySelectorAll('.service-card-wrap')];
-    if (serviceWraps.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const updateStackedState = () => {
-            for (let i = 0; i < serviceWraps.length - 1; i++) {
-                const current = serviceWraps[i];
-                const next = serviceWraps[i + 1];
+        const update = () => {
+            for (let i = 0; i < wraps.length - 1; i++) {
+                const current = wraps[i];
+                const next = wraps[i + 1];
                 const nextTop = next.getBoundingClientRect().top;
                 const nextStickyTop = parseFloat(getComputedStyle(next).top) || 0;
-                // Once the next card has reached (or passed) its own sticky position,
-                // it's fully covering this one — dim/shrink it slightly.
                 current.classList.toggle('is-stacked', nextTop <= nextStickyTop + 1);
             }
         };
+        update();
+        return update;
+    };
 
-        let stackTicking = false;
-        const onStackScroll = () => {
-            if (stackTicking) return;
-            stackTicking = true;
-            requestAnimationFrame(() => {
-                updateStackedState();
-                stackTicking = false;
-            });
-        };
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const stackUpdaters = [
+            initStackGroup('.service-card-wrap'),
+            initStackGroup('.experience-wrap'),
+            initStackGroup('.project-wrap')
+        ].filter(Boolean);
 
-        window.addEventListener('scroll', onStackScroll, { passive: true });
-        window.addEventListener('resize', onStackScroll);
-        updateStackedState();
+        if (stackUpdaters.length) {
+            let stackTicking = false;
+            const onStackScroll = () => {
+                if (stackTicking) return;
+                stackTicking = true;
+                requestAnimationFrame(() => {
+                    stackUpdaters.forEach((update) => update());
+                    stackTicking = false;
+                });
+            };
+            window.addEventListener('scroll', onStackScroll, { passive: true });
+            window.addEventListener('resize', onStackScroll);
+        }
     }
 
     // ===================================================================

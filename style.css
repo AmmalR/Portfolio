@@ -850,13 +850,20 @@ footer .copyright { font-family: var(--font-mono); font-size: .74rem; color: var
 .about-right-column { display: flex; flex-direction: column; gap: 28px; position: sticky; top: 120px; }
 
 .profile-img-container {
-    border-radius: 20px;
+    border-radius: 50%;
     overflow: hidden;
     background: linear-gradient(155deg, var(--prussian), var(--dusk));
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    margin-bottom: 50px;
 }
-.profile-img-container img { width: 100%; height: 100%; object-fit: cover; filter:  contrast(1.05); }
-
+.profile-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 .tech-stack, .personal-info {
     background: var(--paper);
     border: 1px solid rgba(65,90,119,.2);
@@ -1151,6 +1158,58 @@ footer .copyright { font-family: var(--font-mono); font-size: .74rem; color: var
     transition: background .25s ease, color .25s ease, border-color .25s ease;
 }
 .project-link:hover { background: var(--dusk); color: var(--alabaster); border-color: var(--dusk); }
+/* ===================================================================
+   RESUME — sticky stacking (experience + projects)
+=================================================================== */
+.stack-wrap {
+    position: sticky;
+    z-index: calc(var(--i) + 1);
+}
+
+.experience-wrap {
+    top: calc(140px + var(--i) * 14px);
+    padding-bottom: 16px;
+    min-height: 30vh;
+}
+.project-wrap {
+    top: calc(140px + var(--i) * 12px);
+    padding-bottom: 14px;
+    min-height: 22vh;
+}
+
+.experience-item, .project-item {
+    transform-origin: top center;
+    transition: transform .45s cubic-bezier(.2,.6,.2,1),
+                opacity .45s ease,
+                filter .45s ease,
+                border-color .3s ease,
+                box-shadow .3s ease;
+}
+
+.stack-wrap.is-stacked .experience-item,
+.stack-wrap.is-stacked .project-item {
+    transform: scale(.97);
+    opacity: .75;
+    filter: saturate(.85);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stack-wrap { position: static; min-height: 0; }
+    .experience-item, .project-item { transition: none; }
+}
+
+@media (max-width: 768px) {
+    .stack-wrap {
+        position: static;
+        min-height: 0;
+        padding-bottom: 18px;
+    }
+    .experience-item, .project-item {
+        transform: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+    }
+}
 
 /* Education */
 .education-item {
