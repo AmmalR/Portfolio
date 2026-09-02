@@ -33,64 +33,6 @@
         });
     });
 
-    // ===================================================================
-    // Projects page — category filtering (only runs if the grids exist)
-    // ===================================================================
-    const projectGrids = {
-        'oracle': document.getElementById('oracle-projects'),
-        'web': document.getElementById('web-projects'),
-        'mobile': document.getElementById('mobile-projects'),
-        'database': document.getElementById('database-projects'),
-        'wordpress': document.getElementById('wordpress-projects'),
-        'uiux': document.getElementById('uiux-projects'),
-        'design': document.getElementById('design-gallery')
-    };
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const noProjectsMsg = document.getElementById('no-projects');
-
-    const animateProjectCards = (container) => {
-        if (!container) return;
-        const cards = container.querySelectorAll('.project-card, .design-item');
-        cards.forEach((card, index) => {
-            setTimeout(() => card.classList.add('animate'), index * 80);
-        });
-    };
-
-    const showCategory = (category) => {
-        Object.values(projectGrids).forEach((grid) => {
-            if (!grid) return;
-            grid.classList.remove('active');
-            grid.style.display = 'none';
-        });
-
-        const target = projectGrids[category];
-        if (target) {
-            target.style.display = 'grid';
-            requestAnimationFrame(() => {
-                target.classList.add('active');
-                animateProjectCards(target);
-            });
-        }
-
-        if (noProjectsMsg) {
-            const hasItems = target?.querySelector('.project-card, .design-item');
-            noProjectsMsg.style.display = hasItems ? 'none' : 'block';
-        }
-    };
-
-    if (filterButtons.length) {
-        filterButtons.forEach((button) => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach((btn) => btn.classList.remove('active'));
-                button.classList.add('active');
-                showCategory(button.getAttribute('data-filter'));
-            });
-        });
-
-        const initialCategory = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'oracle';
-        showCategory(initialCategory);
-    }
-
     // Reveal sections as they enter the viewport — one pass, no repeat.
     const revealTargets = document.querySelectorAll('.reveal');
     if (revealTargets.length) {
@@ -112,82 +54,88 @@
             revealTargets.forEach((el) => observer.observe(el));
         }
     }
-    // ===================================================================
-    // Sticky stacking cards — services, work experience, projects.
-    // Each group stacks independently (no shared z-index/top math).
-    // ===================================================================
-    const initStackGroup = (selector) => {
-        const wraps = [...document.querySelectorAll(selector)];
-        if (wraps.length < 2) return null;
 
-        const update = () => {
-            for (let i = 0; i < wraps.length - 1; i++) {
-                const current = wraps[i];
-                const next = wraps[i + 1];
-                const nextTop = next.getBoundingClientRect().top;
-                const nextStickyTop = parseFloat(getComputedStyle(next).top) || 0;
-                current.classList.toggle('is-stacked', nextTop <= nextStickyTop + 1);
-            }
-        };
-        update();
-        return update;
-    };
-
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const stackUpdaters = [
-            initStackGroup('.service-card-wrap'),
-            initStackGroup('.experience-wrap'),
-            initStackGroup('.project-wrap')
-        ].filter(Boolean);
-
-        if (stackUpdaters.length) {
-            let stackTicking = false;
-            const onStackScroll = () => {
-                if (stackTicking) return;
-                stackTicking = true;
-                requestAnimationFrame(() => {
-                    stackUpdaters.forEach((update) => update());
-                    stackTicking = false;
-                });
-            };
-            window.addEventListener('scroll', onStackScroll, { passive: true });
-            window.addEventListener('resize', onStackScroll);
-        }
-    }
-
-    // ===================================================================
-    // Contact form -> pre-filled WhatsApp message
-    // ===================================================================
+    // Add accessible labels and a small submit confirmation to the contact form.
     form?.addEventListener('submit', (event) => {
         event.preventDefault();
         if (!form.checkValidity()) {
             form.reportValidity();
             return;
         }
-
-        const name = form.querySelector('#name')?.value.trim() || '';
-        const email = form.querySelector('#email')?.value.trim() || '';
-        const subject = form.querySelector('#subject')?.value.trim() || '';
-        const message = form.querySelector('#message')?.value.trim() || '';
-
-        const whatsappNumber = '923274968541'; // +92 327 4968541, no + or spaces
-        const text =
-            `New message from Ammal's Portfolio\n\n` +
-            `Name: ${name}\n` +
-            `Email: ${email}\n` +
-            `Subject: ${subject}\n\n` +
-            `${message}`;
-
-        const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
-
         if (successMessage) {
-            successMessage.textContent = 'Opening WhatsApp with your message ready to send…';
+            successMessage.textContent = 'Thanks! Your message is ready to send.';
             successMessage.classList.add('show');
         }
-
-        window.open(waUrl, '_blank', 'noopener,noreferrer');
         form.reset();
     });
+
+    // Project filter buttons (projects.html) — toggle grids by data-filter.
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const filterableGrids = document.querySelectorAll('.projects-grid, .design-gallery');
+    const noProjects = document.querySelector('#no-projects');
+    const getTargetId = (filter) => {
+        if (filter === 'design') return 'design-gallery';
+        if (filter === 'all') return null;
+        return `${filter}-projects`;
+    };
+
+    filterButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+            const targetId = getTargetId(filter);
+            let found = false;
+
+            filterableGrids.forEach((grid) => {
+                const matches = filter === 'all' ? true : grid.id === targetId;
+                grid.classList.toggle('active', matches);
+                if (matches) found = true;
+            });
+
+            if (noProjects) noProjects.style.display = found ? 'none' : 'block';
+        });
+    });
+
+    const initialButton = document.querySelector('.filter-btn.active');
+    initialButton?.click();
+
+    // Sticky-stacking cards (.service-card-wrap / .experience-wrap / .project-wrap):
+    // each is CSS `position: sticky` at its own top offset (base + i * step). A card is
+    // "stacked" once it has scrolled past that offset and is sliding out from under the
+    // next one — CSS alone can't detect that, so we compare each element's live top
+    // against its intended sticky offset on scroll.
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const stackGroups = [
+        { selector: '.service-card-wrap', base: 140, step: 14 },
+        { selector: '.experience-wrap', base: 140, step: 14 },
+        { selector: '.project-wrap', base: 140, step: 12 },
+    ].map((cfg) => ({ ...cfg, items: [...document.querySelectorAll(cfg.selector)] }))
+     .filter((cfg) => cfg.items.length);
+
+    if (stackGroups.length && !prefersReducedMotion) {
+        let ticking = false;
+        const updateStacks = () => {
+            stackGroups.forEach(({ items, base, step }) => {
+                items.forEach((item, i) => {
+                    const stickyTop = base + i * step;
+                    const actualTop = item.getBoundingClientRect().top;
+                    item.classList.toggle('is-stacked', actualTop < stickyTop - 4);
+                });
+            });
+            ticking = false;
+        };
+        const onScroll = () => {
+            if (!ticking) {
+                requestAnimationFrame(updateStacks);
+                ticking = true;
+            }
+        };
+        updateStacks();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+    }
 
     // Make image tiles keyboard-friendly when they are interactive.
     document.querySelectorAll('.design-item').forEach((item) => {

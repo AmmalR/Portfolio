@@ -170,7 +170,6 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
     padding: 26px 32px;
     max-width: 1200px;
     margin: 0 auto;
-    opacity: 0;
     animation: heroFadeDown .7s ease forwards;
     animation-delay: .1s;
 }
@@ -263,7 +262,6 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 
 /* staggered load-in animation for kicker / title lines / lede / button */
 .anim-in {
-    opacity: 0;
     transform: translateY(22px);
     animation: heroFadeUp .8s cubic-bezier(.2,.6,.2,1) forwards;
     animation-delay: var(--d, 0s);
@@ -654,7 +652,6 @@ footer .copyright { font-family: var(--font-mono); font-size: .74rem; color: var
     border: 1px solid rgba(65,90,119,.2);
     border-radius: 18px;
     overflow: hidden;
-    opacity: 0;
     transform: translateY(24px);
     transition: opacity .5s ease, transform .5s ease, box-shadow .3s ease, border-color .3s ease;
 }
@@ -673,6 +670,27 @@ footer .copyright { font-family: var(--font-mono); font-size: .74rem; color: var
     transition: transform .5s ease, filter .4s ease;
 }
 .project-card:hover .project-image img { transform: scale(1.06); filter: grayscale(0); }
+
+.project-card.quran-card,
+.project-card.image-fit-card {
+    --project-image-height: 170px;
+}
+.project-card.quran-card .project-image,
+.project-card.image-fit-card .project-image {
+    height: var(--project-image-height);
+    background: #f7f5ef;
+}
+.project-card.quran-card .project-image img,
+.project-card.image-fit-card .project-image img {
+    object-fit: contain;
+    padding: 10px;
+    filter: none;
+}
+.project-card.quran-card:hover .project-image img,
+.project-card.image-fit-card:hover .project-image img {
+    transform: none;
+    filter: none;
+}
 
 .project-tags {
     position: absolute;
