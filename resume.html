@@ -5,745 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ammal Raheem | Resume</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Global Styles - Consistent with Portfolio */
-        :root {
-            /* Dark Mode Colors (Original) */
-            --primary-color: #4da6ff;
-            --secondary-color: #36454F;
-            --dark-color: #1a1a1a;
-            --light-color: #f0f0f0;
-            --accent-color: #ff6b6b;
-            --card-bg: #2d3748;
-            --shadow-color: rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Light Mode Colors - Same as Homepage */
-        body.light-mode {
-            --primary-color: #0B5884;
-            --secondary-color: #aec3d0;
-            --dark-color: #dadadb;
-            --light-color: #272a2f;
-            --accent-color: #FF9A76;
-            --card-bg: #dadadb;
-            --shadow-color: rgba(0, 0, 0, 0.08);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-            line-height: 1.6;
-            transition: all 0.3s ease;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Rounded Navigation Header - Same as Homepage */
-        .rounded-header {
-            background-color: var(--secondary-color);
-            border-radius: 50px;
-            box-shadow: 0 4px 20px var(--shadow-color);
-            position: fixed;
-            width: 94%;
-            max-width: 1150px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            border: 1px solid rgba(77, 166, 255, 0.1);
-        }
-        
-        body.light-mode .rounded-header {
-            border: 1px solid rgba(44, 130, 201, 0.1);
-        }
-        
-        .rounded-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
-            z-index: 1;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-        }
-        
-        .logo img {
-            height: 40px;
-            width: auto;
-            transition: transform 0.3s ease;
-        }
-        
-        .logo img:hover {
-            transform: scale(1.05);
-        }
-        
-        /* Logo visibility control - Same as Homepage */
-        .logo-dark {
-            display: block;
-        }
-        
-        .logo-light {
-            display: none;
-        }
-        
-        body.light-mode .logo-dark {
-            display: none;
-        }
-        
-        body.light-mode .logo-light {
-            display: block;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 10px;
-        }
-        
-        .nav-links li {
-            position: relative;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--light-color);
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            padding: 8px 18px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .nav-links a::before {
-            content: '➤';
-            font-size: 0.7rem;
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-            transform: translateX(-5px);
-        }
-        
-        .nav-links a:hover::before {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary-color);
-            background-color: rgba(77, 166, 255, 0.1);
-        }
-        
-        body.light-mode .nav-links a:hover {
-            background-color: rgba(44, 130, 201, 0.1);
-        }
-        
-        .nav-links a.active {
-            color: var(--primary-color);
-            background-color: rgba(77, 166, 255, 0.15);
-            font-weight: 600;
-        }
-        
-        body.light-mode .nav-links a.active {
-            background-color: rgba(44, 130, 201, 0.15);
-        }
-        
-        .nav-links a.active::before {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            color: var(--light-color);
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-            background: rgba(77, 166, 255, 0.1);
-            padding: 8px 12px;
-            border-radius: 8px;
-        }
-        
-        body.light-mode .hamburger {
-            background: rgba(44, 130, 201, 0.1);
-        }
-        
-        .hamburger:hover {
-            color: var(--primary-color);
-            transform: rotate(90deg);
-            background: rgba(77, 166, 255, 0.2);
-        }
-        
-        body.light-mode .hamburger:hover {
-            background: rgba(44, 130, 201, 0.2);
-        }
-        
-        /* Resume Section */
-        .resume {
-            padding: 120px 0 80px;
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--dark-color) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .resume::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(77, 166, 255, 0.1) 0%, transparent 70%);
-            animation: pulse 15s infinite linear;
-            z-index: 0;
-        }
-        
-        body.light-mode .resume::before {
-            background: radial-gradient(circle, rgba(44, 130, 201, 0.1) 0%, transparent 70%);
-        }
-        
-        .resume-container {
-            position: relative;
-            z-index: 1;
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 15px 40px var(--shadow-color);
-            padding: 40px;
-            border: 1px solid rgba(77, 166, 255, 0.2);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease forwards 0.5s;
-            transition: all 0.4s ease;
-        }
-        
-        body.light-mode .resume-container {
-            border: 1px solid rgba(44, 130, 201, 0.2);
-        }
-        
-        .resume-container:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px var(--shadow-color);
-            border-color: rgba(77, 166, 255, 0.3);
-        }
-        
-        body.light-mode .resume-container:hover {
-            border-color: rgba(44, 130, 201, 0.3);
-        }
-        
-        .resume-header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid rgba(77, 166, 255, 0.3);
-        }
-        
-        .resume-header h1 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        
-        .resume-header p {
-            color: var(--light-color);
-            opacity: 0.8;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-        
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .contact-info a {
-            color: var(--light-color);
-            opacity: 0.8;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-            padding: 8px 15px;
-            border-radius: 20px;
-            background-color: rgba(77, 166, 255, 0.05);
-            border: 1px solid rgba(77, 166, 255, 0.1);
-        }
-        
-        body.light-mode .contact-info a {
-            background-color: rgba(44, 130, 201, 0.05);
-            border: 1px solid rgba(44, 130, 201, 0.1);
-        }
-        
-        .contact-info a:hover {
-            color: var(--primary-color);
-            opacity: 1;
-            background-color: rgba(77, 166, 255, 0.1);
-            border-color: rgba(77, 166, 255, 0.3);
-            transform: translateY(-3px);
-        }
-        
-        body.light-mode .contact-info a:hover {
-            background-color: rgba(44, 130, 201, 0.1);
-            border-color: rgba(44, 130, 201, 0.3);
-        }
-        
-        .contact-info i {
-            margin-right: 8px;
-            color: var(--primary-color);
-        }
-        
-        .resume-section {
-            margin-bottom: 40px;
-        }
-        
-        .section-title {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(77, 166, 255, 0.2);
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 80px;
-            height: 2px;
-            background-color: var(--primary-color);
-        }
-        
-        .experience-item, .project-item, .education-item {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px dashed rgba(240, 240, 240, 0.1);
-        }
-        
-        .experience-item:last-child, 
-        .project-item:last-child,
-        .education-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .job-header, .project-header, .education-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .job-title, .project-title, .degree {
-            font-size: 1.3rem;
-            color: var(--light-color);
-            font-weight: 600;
-        }
-        
-        .company, .project-tech, .institution {
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-        
-        .date {
-            color: var(--light-color);
-            opacity: 0.7;
-            font-size: 0.9rem;
-            background-color: rgba(77, 166, 255, 0.1);
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-weight: 500;
-        }
-        
-        body.light-mode .date {
-            background-color: rgba(44, 130, 201, 0.1);
-        }
-        
-        .job-description, .project-description {
-            margin-bottom: 15px;
-            color: var(--light-color);
-            opacity: 0.8;
-        }
-        
-        .responsibilities, .achievements, .skills-list {
-            margin-left: 20px;
-        }
-        
-        .responsibilities li, .achievements li, .skills-list li {
-            margin-bottom: 8px;
-            color: var(--light-color);
-            opacity: 0.8;
-            position: relative;
-        }
-        
-        .responsibilities li::before, 
-        .achievements li::before,
-        .skills-list li::before {
-            content: '▹';
-            position: absolute;
-            left: -20px;
-            color: var(--primary-color);
-        }
-        
-        .sub-title {
-            font-weight: 600;
-            color: var(--light-color);
-            margin: 15px 0 8px;
-            font-size: 1.1rem;
-        }
-        
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .skill-category {
-            background-color: rgba(77, 166, 255, 0.05);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 3px solid var(--primary-color);
-            transition: transform 0.3s ease;
-        }
-        
-        body.light-mode .skill-category {
-            background-color: rgba(44, 130, 201, 0.05);
-        }
-        
-        .skill-category:hover {
-            transform: translateY(-5px);
-            background-color: rgba(77, 166, 255, 0.1);
-        }
-        
-        body.light-mode .skill-category:hover {
-            background-color: rgba(44, 130, 201, 0.1);
-        }
-        
-        .skill-category h4 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        
-        .certifications-list {
-            columns: 2;
-            gap: 30px;
-        }
-        
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            color: var(--primary-color);
-            text-decoration: none;
-            margin-top: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .project-link:hover {
-            color: var(--light-color);
-            transform: translateX(5px);
-        }
-        
-        .project-link i {
-            margin-right: 6px;
-        }
-        
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 30px;
-            background-color: var(--primary-color);
-            color: var(--dark-color);
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 30px;
-            box-shadow: 0 4px 15px rgba(77, 166, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-        
-        body.light-mode .download-btn {
-            box-shadow: 0 4px 15px rgba(44, 130, 201, 0.3);
-        }
-        
-        .download-btn:hover {
-            background-color: var(--light-color);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(77, 166, 255, 0.4);
-        }
-        
-        body.light-mode .download-btn:hover {
-            box-shadow: 0 6px 20px rgba(44, 130, 201, 0.4);
-        }
-        
-        .download-btn i {
-            margin-right: 8px;
-        }
-        
-        /* Footer - Same as Homepage */
-        footer {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-            padding: 40px 0 20px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .social-links {
-            margin-bottom: 25px;
-        }
-        
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--secondary-color);
-            color: var(--light-color);
-            font-size: 1.2rem;
-            margin: 0 10px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        
-        .social-links a:hover {
-            background-color: var(--primary-color);
-            color: var(--dark-color);
-            transform: translateY(-5px) rotate(10deg);
-        }
-        
-        footer p {
-            color: var(--light-color);
-            opacity: 0.6;
-            font-size: 0.9rem;
-            margin-top: 20px;
-        }
-        
-        /* Theme Toggle Button - Same as Homepage */
-        .theme-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            color: var(--dark-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 4px 15px var(--shadow-color);
-            transition: all 0.3s ease;
-            border: none;
-        }
-        
-        .theme-toggle i {
-            transition: transform 0.3s ease;
-        }
-        
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-        
-        .theme-toggle:hover i {
-            transform: rotate(20deg);
-        }
-        
-        .fa-sun, .fa-moon {
-            position: absolute;
-        }
-        
-        body:not(.light-mode) .fa-moon {
-            display: none;
-        }
-        
-        body.light-mode .fa-sun {
-            display: none;
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .rounded-header {
-                width: 96%;
-                border-radius: 30px;
-                margin-top: 10px;
-            }
-            
-            nav {
-                padding: 15px 20px;
-            }
-            
-            .certifications-list {
-                columns: 1;
-            }
-            
-            .resume {
-                padding: 100px 0 60px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                background-color: var(--secondary-color);
-                padding: 20px;
-                box-shadow: 0 5px 10px var(--shadow-color);
-                z-index: 99;
-                border-radius: 0 0 15px 15px;
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links li {
-                margin: 10px 0;
-            }
-            
-            .nav-links a {
-                padding: 12px 20px;
-                border-radius: 10px;
-                justify-content: flex-start;
-            }
-            
-            .hamburger {
-                display: block;
-            }
-            
-            .resume-container {
-                padding: 30px;
-            }
-            
-            .resume-header h1 {
-                font-size: 2rem;
-            }
-            
-            .job-header, .project-header, .education-header {
-                flex-direction: column;
-            }
-            
-            .date {
-                margin-top: 5px;
-                align-self: flex-start;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .rounded-header {
-                border-radius: 20px;
-            }
-            
-            .theme-toggle {
-                bottom: 15px;
-                right: 15px;
-                width: 45px;
-                height: 45px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .rounded-header {
-                border-radius: 15px;
-                width: 98%;
-                margin-top: 10px;
-            }
-            
-            nav {
-                padding: 12px 15px;
-            }
-            
-            .logo img {
-                height: 35px;
-            }
-            
-            .resume-container {
-                padding: 20px;
-            }
-            
-            .skills-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
-    <!-- Rounded Navigation Header - Same as Homepage -->
     <header class="rounded-header">
         <nav>
             <div class="logo">
-                <!-- Dark mode logo -->
-                <img src="Logo.png" alt="Ammal Raheem Logo" class="logo-dark">
-                <!-- Light mode logo -->
-                <img src="Logo light.png" alt="Ammal Raheem Logo" class="logo-light">
+                <img src="assets/images/Logo.png" alt="Ammal Raheem Logo" class="logo-dark">
+                <img src="assets/images/Logo light.png" alt="Ammal Raheem Logo" class="logo-light">
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -752,112 +21,110 @@
                 <li><a href="resume.html" class="active">Resume</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" role="button" aria-label="Toggle menu" tabindex="0">
                 <i class="fas fa-bars"></i>
             </div>
         </nav>
     </header>
 
-    <!-- Resume Section -->
-    <section class="resume">
+    <section class="resume-page">
         <div class="container">
             <div class="resume-container">
-                <div class="resume-header">
+                <div class="resume-header reveal">
                     <h1>AMMAL RAHEEM</h1>
-                    <p>UI/UX Designer & Oracle Technical Consultant | IT Graduate specializing in Full-Stack Development</p>
+                    <p>UI/UX Designer &amp; Oracle Technical Consultant — IT graduate specializing in full-stack development</p>
                     <div class="contact-info">
                         <a href="mailto:ammalraheem14@gmail.com"><i class="fas fa-envelope"></i> ammalraheem14@gmail.com</a>
                         <a href="tel:+923274968541"><i class="fas fa-phone"></i> +92 327 4968541</a>
-                        <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/"><i class="fab fa-linkedin"></i> LinkedIn Profile</a>
-                        <a href="https://github.com/AmmalR"><i class="fab fa-github"></i> GitHub Profile</a>
+                        <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/AmmalR" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                     </div>
                 </div>
-                
+
                 <!-- Work Experience -->
-                <div class="resume-section">
-                    <h2 class="section-title">Work Experience</h2>
-                    
+                <div class="resume-section reveal">
+                    <h2 class="resume-heading">Work Experience</h2>
+
                     <div class="experience-item">
                         <div class="job-header">
                             <div>
-                                <h3 class="job-title">UI/UX Designer & Technical Assistant</h3>
-                                <p class="company">MALIND TECH</p>
+                                <h3 class="job-title">UI/UX Designer &amp; Technical Assistant</h3>
+                                <p class="company">Malind Tech</p>
                             </div>
                             <p class="date">February 2026 – Present</p>
                         </div>
                         <div class="job-description">
-                            <p class="sub-title">Key Responsibilities:</p>
+                            <p class="sub-title">Key Responsibilities</p>
                             <ul class="responsibilities">
                                 <li>Design visually compelling graphics and user-centered UI/UX for web and mobile platforms, including wireframes, user flows, and high-fidelity mockups.</li>
                                 <li>Maintain consistent brand identity across all platforms by managing standardized design systems, typography, and UI kits.</li>
-                                <li>Collaborate with cross-functional teams to translate business requirements into responsive, accessible, and high-performance designs.</li>
-                                <li>Manage the implementation, customization, and maintenance of ERP modules such as HRMS, Finance, and CRM to ensure operational efficiency.</li>
+                                <li>Collaborate with cross-functional teams to translate business requirements into responsive, accessible, high-performance designs.</li>
+                                <li>Manage the implementation, customization, and maintenance of ERP modules such as HRMS, Finance, and CRM.</li>
                                 <li>Provide technical support and monitor system performance to maintain data integrity and resolve user-reported issues.</li>
                                 <li>Oversee system security, including database backups, bug tracking, and coordinating upgrades with developers and consultants.</li>
-                                <li>Facilitate user enablement through hands-on training, technical documentation, and the preparation of comprehensive system reports.</li>
+                                <li>Facilitate user enablement through hands-on training, technical documentation, and system reporting.</li>
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="experience-item">
                         <div class="job-header">
                             <div>
                                 <h3 class="job-title">Oracle Technical Consultant</h3>
-                                <p class="company">ICM SOFTWARE HOUSE</p>
+                                <p class="company">ICM Software House</p>
                             </div>
                             <p class="date">October 2024 – January 2026</p>
                         </div>
                         <div class="job-description">
-                            <p class="sub-title">Key Responsibilities:</p>
+                            <p class="sub-title">Key Responsibilities</p>
                             <ul class="responsibilities">
-                                <li>Managed full-cycle implementation, upgrade, and ongoing support for Oracle E-Business Suite (EBS) and Oracle Fusion Applications across modules including Financials (FIN), Supply Chain Management (SCM), and Human Capital Management (HCM).</li>
-                                <li>Provided techno-functional expertise by collaborating with business users to design and implement custom solutions, extensions, and enhancements tailored to complex business requirements.</li>
-                                <li>Designed, developed, and maintained technical components for Oracle EBS using a comprehensive set of tools: SQL/PLSQL, Oracle Forms/Reports, OAF.</li>
-                                <li>Developed and deployed critical reports, analytics, and data extracts in Oracle Fusion across Financials, SCM, and HCM domains using both legacy and modern Oracle reporting tools: BI Publisher, OTBI, Smart View, Oracle Reports.</li>
-                                <li>Performed database administration tasks, including backup, recovery, and performance tuning.</li>
+                                <li>Managed full-cycle implementation, upgrade, and ongoing support for Oracle E-Business Suite (EBS) and Oracle Fusion across Financials, SCM, and HCM.</li>
+                                <li>Provided techno-functional expertise, collaborating with business users to design custom solutions and enhancements for complex requirements.</li>
+                                <li>Designed and maintained technical components using SQL/PLSQL, Oracle Forms/Reports, and OAF.</li>
+                                <li>Developed and deployed reports and data extracts across Financials, SCM, and HCM using BI Publisher, OTBI, Smart View, and Oracle Reports.</li>
+                                <li>Performed database administration tasks including backup, recovery, and performance tuning.</li>
                             </ul>
-                            <p class="sub-title">Key Technologies:</p>
+                            <p class="sub-title">Key Technologies</p>
                             <p>Oracle Apex, Oracle EBS, Oracle Fusion Cloud, SQL, PL/SQL, Oracle VBCS, Oracle Redwood Applications</p>
-                            <p class="sub-title">Implementation Projects:</p>
+                            <p class="sub-title">Implementation Projects</p>
                             <ul class="responsibilities">
-                                <li>Oracle EBS - Emirat, Hail, KSA</li>
-                                <li>Oracle EBS - Delta Enterprises, Riyadh, KSA</li>
-                                <li>Oracle EBS - King Khaled Eye Specialist Hospital, Riyadh, KSA</li>
-                                <li>Oracle Fusion - The Arab Energy Funds</li>
+                                <li>Oracle EBS — Emirat, Hail, KSA</li>
+                                <li>Oracle EBS — Delta Enterprises, Riyadh, KSA</li>
+                                <li>Oracle EBS — King Khaled Eye Specialist Hospital, Riyadh, KSA</li>
+                                <li>Oracle Fusion — The Arab Energy Funds</li>
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="experience-item">
                         <div class="job-header">
                             <div>
-                                <h3 class="job-title">Graphic Designer & Social Media Intern</h3>
-                                <p class="company">AMBER CAPACITORS</p>
+                                <h3 class="job-title">Graphic Designer &amp; Social Media Intern</h3>
+                                <p class="company">Amber Capacitors</p>
                             </div>
                             <p class="date">July 2024 – September 2024</p>
                         </div>
                         <div class="job-description">
-                            <p class="sub-title">Key Responsibilities:</p>
+                            <p class="sub-title">Key Responsibilities</p>
                             <ul class="responsibilities">
-                                <li>Managed and updated company's social media accounts.</li>
+                                <li>Managed and updated the company's social media accounts.</li>
                                 <li>Created engaging content to increase brand awareness and audience engagement.</li>
                                 <li>Assisted in organizing and executing marketing campaigns.</li>
                             </ul>
-                            <p class="sub-title">Key Achievements:</p>
+                            <p class="sub-title">Key Achievements</p>
                             <ul class="achievements">
-                                <li>Successfully launched a new social media campaign, resulting in a significant increase in followers.</li>
-                                <li>Designed visually appealing marketing materials that effectively communicated the company's brand message.</li>
-                                <li>Gained valuable experience in graphic design and social media marketing.</li>
-                                <li>Developed strong skills in using Figma.</li>
+                                <li>Launched a new social media campaign resulting in a significant increase in followers.</li>
+                                <li>Designed marketing materials that effectively communicated the company's brand message.</li>
+                                <li>Developed strong skills in Figma alongside graphic design and social media marketing.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Projects -->
-                <div class="resume-section">
-                    <h2 class="section-title">Projects</h2>
-                    
+                <div class="resume-section reveal">
+                    <h2 class="resume-heading">Projects</h2>
+
                     <div class="project-item">
                         <div class="project-header">
                             <div>
@@ -868,12 +135,12 @@
                         <div class="project-description">
                             <ul class="responsibilities">
                                 <li>A comprehensive Android application designed to digitalize and streamline healthcare and childcare services in Pakistan.</li>
-                                <li>Technologies Used: Java, XML, Firebase Cloud Messaging, Stripe API, Google Maps API, GitHub.</li>
-                                <li>Outcome: Created a secure, live-tracking platform that improves emergency response efficiency for nurses and physiotherapists.</li>
+                                <li>Technologies: Java, XML, Firebase Cloud Messaging, Stripe API, Google Maps API, GitHub.</li>
+                                <li>Outcome: A secure, live-tracking platform that improves emergency response efficiency for nurses and physiotherapists.</li>
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="project-item">
                         <div class="project-header">
                             <div>
@@ -884,15 +151,15 @@
                         <div class="project-description">
                             <ul class="responsibilities">
                                 <li>A modern web application built to showcase creative portfolios and innovative ideas.</li>
-                                <li>Technologies Used: React JS, Tailwind CSS, Frame Motion, React Router, Netlify.</li>
-                                <li>Outcome: Delivered a highly responsive, visually engaging site with smooth animations and optimized performance.</li>
+                                <li>Technologies: React, Tailwind CSS, Framer Motion, React Router, Netlify.</li>
+                                <li>Outcome: A responsive, visually engaging site with smooth animations and optimized performance.</li>
                             </ul>
                             <a href="https://www.creativepair.site" target="_blank" class="project-link">
                                 <i class="fas fa-external-link-alt"></i> www.creativepair.site
                             </a>
                         </div>
                     </div>
-                    
+
                     <div class="project-item">
                         <div class="project-header">
                             <div>
@@ -903,15 +170,15 @@
                         <div class="project-description">
                             <ul class="responsibilities">
                                 <li>An aesthetic e-commerce style blog showcasing a curated collection of perfumes and scented candles.</li>
-                                <li>Technologies Used: Figma, HTML5, CSS3, JavaScript.</li>
-                                <li>Outcome: Successfully translated high-fidelity Figma designs into a functional, responsive website featuring interactive hover effects.</li>
+                                <li>Technologies: Figma, HTML5, CSS3, JavaScript.</li>
+                                <li>Outcome: High-fidelity Figma designs translated into a functional, responsive site with interactive hover effects.</li>
                             </ul>
                             <a href="https://ammalr.github.io/Scents/" target="_blank" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> https://ammalr.github.io/Scents/
+                                <i class="fas fa-external-link-alt"></i> ammalr.github.io/Scents
                             </a>
                         </div>
                     </div>
-                    
+
                     <div class="project-item">
                         <div class="project-header">
                             <div>
@@ -922,15 +189,15 @@
                         <div class="project-description">
                             <ul class="responsibilities">
                                 <li>A professional personal website highlighting my journey as an IT student and Technical Consultant.</li>
-                                <li>Technologies Used: HTML, CSS, JavaScript.</li>
-                                <li>Outcome: Established a strong online presence that effectively communicates technical skills and past project success.</li>
+                                <li>Technologies: HTML, CSS, JavaScript.</li>
+                                <li>Outcome: A strong online presence communicating technical skills and past project success.</li>
                             </ul>
                             <a href="https://ammalr.github.io/Portfolio/" target="_blank" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> https://ammalr.github.io/Portfolio/
+                                <i class="fas fa-external-link-alt"></i> ammalr.github.io/Portfolio
                             </a>
                         </div>
                     </div>
-                    
+
                     <div class="project-item">
                         <div class="project-header">
                             <div>
@@ -941,15 +208,15 @@
                         <div class="project-description">
                             <ul class="responsibilities">
                                 <li>A multilingual corporate website for Supead, focusing on professional service presentation.</li>
-                                <li>Technologies Used: WordPress, Multilingual Plugins, Responsive Design Frameworks.</li>
-                                <li>Outcome: Improved user satisfaction by providing a seamless, localized experience across all device types.</li>
+                                <li>Technologies: WordPress, multilingual plugins, responsive design frameworks.</li>
+                                <li>Outcome: Improved user satisfaction through a seamless, localized experience across device types.</li>
                             </ul>
                             <a href="https://www.supeadsa.com" target="_blank" class="project-link">
                                 <i class="fas fa-external-link-alt"></i> www.supeadsa.com
                             </a>
                         </div>
                     </div>
-                    
+
                     <div class="project-item">
                         <div class="project-header">
                             <div>
@@ -960,29 +227,19 @@
                         <div class="project-description">
                             <ul class="responsibilities">
                                 <li>A global multi-site deployment for an international software house operating across Saudi Arabia, UK, USA, Canada, and Pakistan.</li>
-                                <li>Technologies Used: WordPress, Cross-domain Management.</li>
-                                <li>Outcome: Launched a visually stunning, intuitive platform that successfully represents the company's global reach.</li>
+                                <li>Technologies: WordPress, cross-domain management.</li>
+                                <li>Outcome: An intuitive platform that represents the company's global reach.</li>
                             </ul>
                             <div class="project-links">
-                                <a href="https://www.icmsh.us" target="_blank" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i> www.icmsh.us
-                                </a>
-                                <a href="https://www.icm-pak.com" target="_blank" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i> www.icm-pak.com
-                                </a>
-                                <a href="https://www.icmsh.ca" target="_blank" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i> www.icmsh.ca
-                                </a>
-                                <a href="https://www.icmsk.com" target="_blank" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i> www.icmsk.com
-                                </a>
-                                <a href="https://www.icmsh.uk" target="_blank" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i> www.icmsh.uk
-                                </a>
+                                <a href="https://www.icmsh.us" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> icmsh.us</a>
+                                <a href="https://www.icm-pak.com" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> icm-pak.com</a>
+                                <a href="https://www.icmsh.ca" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> icmsh.ca</a>
+                                <a href="https://www.icmsk.com" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> icmsk.com</a>
+                                <a href="https://www.icmsh.uk" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> icmsh.uk</a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="project-item">
                         <div class="project-header">
                             <div>
@@ -992,13 +249,13 @@
                         </div>
                         <div class="project-description">
                             <ul class="responsibilities">
-                                <li>A backend system focused on the efficient storage and retrieval of flight and passenger data.</li>
-                                <li>Technologies Used: MySQL, Data Normalization.</li>
-                                <li>Outcome: Developed a secure, normalized relational schema that ensures data integrity and supports complex search queries.</li>
+                                <li>A backend system focused on efficient storage and retrieval of flight and passenger data.</li>
+                                <li>Technologies: MySQL, data normalization.</li>
+                                <li>Outcome: A secure, normalized relational schema ensuring data integrity and supporting complex queries.</li>
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="project-item">
                         <div class="project-header">
                             <div>
@@ -1009,125 +266,122 @@
                         <div class="project-description">
                             <ul class="responsibilities">
                                 <li>A software solution for managing book records, member registrations, and library inventory.</li>
-                                <li>Technologies Used: C++, Data Structures (Arrays, Linked Lists).</li>
-                                <li>Outcome: Optimized library operations through the implementation of efficient searching and sorting algorithms.</li>
+                                <li>Technologies: C++, data structures (arrays, linked lists).</li>
+                                <li>Outcome: Optimized library operations through efficient searching and sorting algorithms.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Education -->
-                <div class="resume-section">
-                    <h2 class="section-title">Education</h2>
-                    
+                <div class="resume-section reveal">
+                    <h2 class="resume-heading">Education</h2>
+
                     <div class="education-item">
                         <div class="education-header">
                             <div>
-                                <h3 class="degree">Bachelor of Science in Information Technology (IT)</h3>
-                                <p class="institution">UNIVERSITY OF EDUCATION, LAHORE</p>
+                                <h3 class="degree">Bachelor of Science in Information Technology</h3>
+                                <p class="institution">University of Education, Lahore</p>
                             </div>
-                            <p class="date">2021 - 2025</p>
+                            <p class="date">2021 – 2025</p>
                         </div>
                     </div>
-                    
+
                     <div class="education-item">
                         <div class="education-header">
                             <div>
                                 <h3 class="degree">Intermediate in FSc Pre-Engineering</h3>
-                                <p class="institution">PUNJAB GROUP OF COLLEGES, LAHORE</p>
+                                <p class="institution">Punjab Group of Colleges, Lahore</p>
                             </div>
-                            <p class="date">2019 - 2021</p>
+                            <p class="date">2019 – 2021</p>
                         </div>
                     </div>
-                    
+
                     <div class="education-item">
                         <div class="education-header">
                             <div>
                                 <h3 class="degree">Matriculation</h3>
-                                <p class="institution">CANTT GRAMMAR SCHOOL, LAHORE</p>
+                                <p class="institution">Cantt Grammar School, Lahore</p>
                             </div>
-                            <p class="date">2017 - 2019</p>
+                            <p class="date">2017 – 2019</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Certifications -->
-                <div class="resume-section">
-                    <h2 class="section-title">Certifications</h2>
-                    <ul class="skills-list certifications-list">
-                        <li>Oracle Fusion Cloud Applications ERP Foundations Certified Associate - Oracle MyLearn</li>
-                        <li>Oracle Fusion Cloud Applications SCM Certified Foundations Associate - Oracle MyLearn</li>
-                        <li>Oracle Fusion Cloud Applications HCM Certified Foundations Associate - Oracle MyLearn</li>
-                        <li>Oracle Fusion Cloud Applications CX Certified Foundations Associate - Oracle MyLearn</li>
-                        <li>Oracle APEX Cloud Developer Certified Professional - Oracle MyLearn</li>
-                        <li>Oracle Redwood Application 2025 Certified Developer Associate - Oracle MyLearn</li>
-                        <li>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate - Oracle MyLearn</li>
-                        <li>Oracle Cloud Infrastructure 2025 Certified Foundations Associate - Oracle MyLearn</li>
-                        <li>Oracle Data Platform 2025 Certified Foundations Associate - Oracle MyLearn</li>
-                        <li>Course for Freelancers and Entrepreneurs - Learn from Fiverr</li>
-                        <li>Basics of Graphic Designing - LinkedIn Learning</li>
-                        <li>HTML - Sololearn</li>
-                        <li>CSS - Sololearn</li>
-                        <li>Introduction to JavaScript - Sololearn</li>
-                        <li>Introduction to SQL - Sololearn</li>
-                        <li>SQL Intermediate - Sololearn</li>
-                        <li>SEO Foundations - LinkedIn Learning</li>
+                <div class="resume-section reveal">
+                    <h2 class="resume-heading">Certifications</h2>
+                    <ul class="certifications-list">
+                        <li>Oracle Fusion Cloud Applications ERP Foundations Certified Associate — Oracle MyLearn</li>
+                        <li>Oracle Fusion Cloud Applications SCM Certified Foundations Associate — Oracle MyLearn</li>
+                        <li>Oracle Fusion Cloud Applications HCM Certified Foundations Associate — Oracle MyLearn</li>
+                        <li>Oracle Fusion Cloud Applications CX Certified Foundations Associate — Oracle MyLearn</li>
+                        <li>Oracle APEX Cloud Developer Certified Professional — Oracle MyLearn</li>
+                        <li>Oracle Redwood Application 2025 Certified Developer Associate — Oracle MyLearn</li>
+                        <li>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate — Oracle MyLearn</li>
+                        <li>Oracle Cloud Infrastructure 2025 Certified Foundations Associate — Oracle MyLearn</li>
+                        <li>Oracle Data Platform 2025 Certified Foundations Associate — Oracle MyLearn</li>
+                        <li>Course for Freelancers and Entrepreneurs — Learn from Fiverr</li>
+                        <li>Basics of Graphic Designing — LinkedIn Learning</li>
+                        <li>HTML — Sololearn</li>
+                        <li>CSS — Sololearn</li>
+                        <li>Introduction to JavaScript — Sololearn</li>
+                        <li>Introduction to SQL — Sololearn</li>
+                        <li>SQL Intermediate — Sololearn</li>
+                        <li>SEO Foundations — LinkedIn Learning</li>
                     </ul>
                 </div>
-                
+
                 <!-- Skills -->
-                <div class="resume-section">
-                    <h2 class="section-title">Skills</h2>
-                    
+                <div class="resume-section reveal">
+                    <h2 class="resume-heading">Skills</h2>
                     <div class="skills-container">
                         <div class="skill-category">
                             <h4>Technical Skills</h4>
                             <ul class="skills-list">
-                                <li>UI/UX Design & Prototyping</li>
-                                <li>Oracle EBS & Fusion Implementation</li>
-                                <li>SQL & PL/SQL Development</li>
+                                <li>UI/UX Design &amp; Prototyping</li>
+                                <li>Oracle EBS &amp; Fusion Implementation</li>
+                                <li>SQL &amp; PL/SQL Development</li>
                                 <li>Database Administration</li>
-                                <li>React & JavaScript Development</li>
-                                <li>HTML5, CSS3, & Responsive Design</li>
+                                <li>React &amp; JavaScript Development</li>
+                                <li>HTML5, CSS3, &amp; Responsive Design</li>
                                 <li>Android App Development (Java, XML)</li>
-                                <li>WordPress & CMS Development</li>
-                                <li>C++ Programming & Data Structures</li>
-                                <li>Git & Version Control</li>
+                                <li>WordPress &amp; CMS Development</li>
+                                <li>C++ Programming &amp; Data Structures</li>
+                                <li>Git &amp; Version Control</li>
                             </ul>
                         </div>
-                        
                         <div class="skill-category">
-                            <h4>Design & Tools</h4>
+                            <h4>Design &amp; Tools</h4>
                             <ul class="skills-list">
                                 <li>Figma (UI/UX Design)</li>
                                 <li>Adobe Creative Suite</li>
-                                <li>Wireframing & Prototyping</li>
-                                <li>Design Systems & UI Kits</li>
+                                <li>Wireframing &amp; Prototyping</li>
+                                <li>Design Systems &amp; UI Kits</li>
                                 <li>Brand Identity Design</li>
-                                <li>Oracle Apex & VBCS</li>
+                                <li>Oracle Apex &amp; VBCS</li>
                                 <li>Oracle Redwood Applications</li>
-                                <li>Firebase & Cloud Services</li>
-                                <li>Netlify & Web Deployment</li>
+                                <li>Firebase &amp; Cloud Services</li>
+                                <li>Netlify &amp; Web Deployment</li>
                             </ul>
                         </div>
-                        
                         <div class="skill-category">
                             <h4>Soft Skills</h4>
                             <ul class="skills-list">
                                 <li>Cross-functional Collaboration</li>
-                                <li>Client Communication & Training</li>
+                                <li>Client Communication &amp; Training</li>
                                 <li>Project Management</li>
                                 <li>Technical Documentation</li>
-                                <li>Problem Solving & Troubleshooting</li>
+                                <li>Problem Solving &amp; Troubleshooting</li>
                                 <li>Team Leadership</li>
                                 <li>Time Management</li>
-                                <li>Adaptability & Learning</li>
+                                <li>Adaptability &amp; Learning</li>
                                 <li>Attention to Detail</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                
+
                 <div style="text-align: center;">
                     <a href="CV.pdf" class="download-btn" download>
                         <i class="fas fa-download"></i> Download Full Resume
@@ -1137,148 +391,22 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="social-links">
-                <a href="https://github.com/AmmalR"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.instagram.com/not_ar02?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
+            <div class="footer-top">
+                <div>
+                    <div class="footer-sub">Ammal Raheem — ERP Consultant &amp; Product Designer</div>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/AmmalR" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/not_ar02" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
-            <p>&copy; 2026 Ammal Raheem. All rights reserved.</p>
+            <p class="copyright">&copy; 2026 Ammal Raheem. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Theme Toggle Button - Same as Homepage -->
-    <div class="theme-toggle" id="themeToggle">
-        <i class="fas fa-sun"></i>
-        <i class="fas fa-moon"></i>
-    </div>
-
-    <script>
-        // Mobile Navigation Toggle - Same as Homepage
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
-        
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
-        });
-        
-        // Change navbar style on scroll - Same as Homepage
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.rounded-header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
-                header.style.width = '100%';
-                header.style.borderRadius = '0 0 20px 20px';
-                header.style.marginTop = '0';
-            } else {
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
-                if (window.innerWidth > 768) {
-                    header.style.width = '94%';
-                    header.style.borderRadius = '50px';
-                    header.style.marginTop = '20px';
-                } else if (window.innerWidth > 480) {
-                    header.style.width = '96%';
-                    header.style.borderRadius = '30px';
-                    header.style.marginTop = '10px';
-                } else {
-                    header.style.width = '98%';
-                    header.style.borderRadius = '15px';
-                    header.style.marginTop = '10px';
-                }
-            }
-        });
-        
-        // Theme Toggle Functionality with logo switching
-        const themeToggle = document.getElementById('themeToggle');
-        
-        // Check for saved theme preference or default to dark
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        if (savedTheme === 'light') {
-            document.body.classList.add('light-mode');
-            switchLogos(true); // Switch to light mode logos
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            const isLightMode = document.body.classList.toggle('light-mode');
-            
-            // Switch logos based on mode
-            switchLogos(isLightMode);
-            
-            // Save preference
-            const currentTheme = isLightMode ? 'light' : 'dark';
-            localStorage.setItem('theme', currentTheme);
-        });
-        
-        // Function to switch logos
-        function switchLogos(isLightMode) {
-            const logoDark = document.querySelector('.logo-dark');
-            const logoLight = document.querySelector('.logo-light');
-            
-            if (isLightMode) {
-                // Switch to light mode
-                if (logoDark) logoDark.style.display = 'none';
-                if (logoLight) logoLight.style.display = 'block';
-            } else {
-                // Switch to dark mode
-                if (logoDark) logoDark.style.display = 'block';
-                if (logoLight) logoLight.style.display = 'none';
-            }
-        }
-        
-        // Initialize header style on load
-        window.dispatchEvent(new Event('scroll'));
-        
-        // Add hover effect to project items
-        const projectItems = document.querySelectorAll('.project-item');
-        projectItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                item.style.transform = 'translateX(10px)';
-                item.style.transition = 'transform 0.3s ease';
-            });
-            
-            item.addEventListener('mouseleave', () => {
-                item.style.transform = 'translateX(0)';
-            });
-        });
-        
-        // Add animation to skill categories when they come into view
-        const skillCategories = document.querySelectorAll('.skill-category');
-        
-        function animateSkills() {
-            skillCategories.forEach((category, index) => {
-                const categoryPosition = category.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if (categoryPosition < screenPosition) {
-                    setTimeout(() => {
-                        category.style.opacity = '1';
-                        category.style.transform = 'translateY(0)';
-                    }, index * 100);
-                }
-            });
-        }
-        
-        // Set initial state for skill categories
-        skillCategories.forEach(category => {
-            category.style.opacity = '0';
-            category.style.transform = 'translateY(20px)';
-            category.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        });
-        
-        // Trigger animations on load and scroll
-        window.addEventListener('load', animateSkills);
-        window.addEventListener('scroll', animateSkills);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
