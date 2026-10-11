@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ammal Raheem | Contact</title>
+    <title>Ammal Raheem | Projects</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
     <header class="rounded-header">
@@ -17,9 +17,9 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="projects.html">Projects</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
                 <li><a href="resume.html">Resume</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="hamburger" role="button" aria-label="Toggle menu" tabindex="0">
                 <i class="fas fa-bars"></i>
@@ -27,72 +27,589 @@
         </nav>
     </header>
 
-    <section class="contact-page">
+    <section class="projects">
         <div class="container">
-            <div class="contact-content">
-                <div class="contact-info reveal">
-                    <h2>Get In Touch</h2>
-                    <p>Have a project in mind or want to discuss an opportunity? Reach out through the form or directly via the details below — I typically respond within 24 hours.</p>
+            <div class="section-header reveal">
+                <h1>My Projects</h1>
+                <p>Explore my portfolio of professional projects organized by category.</p>
+            </div>
 
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                            <div class="contact-text">
-                                <h3>Email</h3>
-                                <a href="mailto:ammalraheem14@gmail.com">ammalraheem14@gmail.com</a>
+            <div class="filter-buttons reveal">
+                <button class="filter-btn" data-filter="oracle">Oracle</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="database">Database</button>
+                <button class="filter-btn" data-filter="wordpress">WordPress</button>
+                <button class="filter-btn" data-filter="uiux">UI/UX</button>
+            </div>
+
+            <div class="projects-container">
+                <!-- Oracle Projects Grid -->
+                <div class="projects-grid active" id="oracle-projects">
+                    <div class="project-card" data-category="oracle">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Oracle EBS Implementation">
+                            <div class="project-tags">
+                                <span class="project-tag">Oracle EBS</span>
+                                <span class="project-tag">SQL/PLSQL</span>
+                                <span class="project-tag">Finance</span>
                             </div>
                         </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                            <div class="contact-text">
-                                <h3>Phone</h3>
-                                <a href="tel:+923274968541">+92 327 4968541</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <div class="contact-text">
-                                <h3>Location</h3>
-                                <span>Lahore, Pakistan</span>
+                        <div class="project-content">
+                            <h3 class="project-title">Oracle EBS - Emirat, Hail, KSA
+                                <span class="client-badge">ICM Software House</span>
+                            </h3>
+                            <p class="project-description">Full-cycle Oracle E-Business Suite implementation for a major client in Saudi Arabia, covering Financials, SCM, and HCM modules.</p>
+                            <div class="project-links">
+                                <span class="project-link" style="cursor: default;">
+                                    <i class="fas fa-building"></i> Enterprise Project
+                                </span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="contact-social">
-                        <h3>Connect with me</h3>
-                        <div class="contact-social-links">
-                            <a href="https://github.com/AmmalR" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                            <a href="https://www.linkedin.com/in/ammal-raheem-9b469924a/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://www.instagram.com/not_ar02" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <div class="project-card" data-category="oracle">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1580655653885-65763b2597d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Oracle Fusion Implementation">
+                            <div class="project-tags">
+                                <span class="project-tag">Oracle Fusion</span>
+                                <span class="project-tag">Cloud</span>
+                                <span class="project-tag">ERP</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Oracle Fusion - The Arab Energy Funds
+                                <span class="client-badge">ICM Software House</span>
+                            </h3>
+                            <p class="project-description">Oracle Fusion Cloud implementation for a leading energy investment organization, modernizing their enterprise resource planning.</p>
+                            <div class="project-links">
+                                <span class="project-link" style="cursor: default;">
+                                    <i class="fas fa-cloud"></i> Cloud Implementation
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="oracle">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Healthcare EBS">
+                            <div class="project-tags">
+                                <span class="project-tag">Oracle EBS</span>
+                                <span class="project-tag">Healthcare</span>
+                                <span class="project-tag">HCM</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Oracle EBS - King Khaled Eye Specialist Hospital
+                                <span class="client-badge">ICM Software House</span>
+                            </h3>
+                            <p class="project-description">Specialized Oracle EBS implementation for a prestigious eye specialist hospital, focusing on healthcare-specific customization.</p>
+                            <div class="project-links">
+                                <span class="project-link" style="cursor: default;">
+                                    <i class="fas fa-hospital"></i> Healthcare Sector
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="oracle">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Delta Enterprises">
+                            <div class="project-tags">
+                                <span class="project-tag">Oracle EBS</span>
+                                <span class="project-tag">SCM</span>
+                                <span class="project-tag">Riyadh</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Oracle EBS - Delta Enterprises, Riyadh
+                                <span class="client-badge">ICM Software House</span>
+                            </h3>
+                            <p class="project-description">Enterprise resource planning implementation for Delta Enterprises, optimizing their supply chain management processes.</p>
+                            <div class="project-links">
+                                <span class="project-link" style="cursor: default;">
+                                    <i class="fas fa-industry"></i> Enterprise Solution
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="contact-form reveal">
-                    <form id="contactForm" action="#" method="POST">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" class="form-control" required placeholder="Enter your name">
+                <!-- Web Projects Grid -->
+                <div class="projects-grid" id="web-projects">
+                    <div class="project-card" data-category="web">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Creative Pair">
+                            <div class="project-tags">
+                                <span class="project-tag">React</span>
+                                <span class="project-tag">Tailwind CSS</span>
+                                <span class="project-tag">Netlify</span>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email">
+                        <div class="project-content">
+                            <h3 class="project-title">Creative Pair</h3>
+                            <p class="project-description">A modern web application built to showcase creative portfolios and innovative ideas with smooth animations and optimized performance.</p>
+                            <div class="project-links">
+                                <a href="https://www.creativepair.site" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/AmmalR/creative-pair" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" class="form-control" required placeholder="What is this regarding?">
+                    </div>
+
+                    <div class="project-card" data-category="web">
+                        <div class="project-image">
+                            <img src="assets/images/scents.png" alt="SCENTS Blog">
+                            <div class="project-tags">
+                                <span class="project-tag">Figma</span>
+                                <span class="project-tag">HTML/CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="message">Your Message</label>
-                            <textarea id="message" name="message" class="form-control" required placeholder="Your message here..."></textarea>
+                        <div class="project-content">
+                            <h3 class="project-title">SCENTS Blog</h3>
+                            <p class="project-description">An aesthetic e-commerce style blog showcasing a curated collection of perfumes and scented candles with interactive design elements.</p>
+                            <div class="project-links">
+                                <a href="https://ammalr.github.io/Scents/" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/AmmalR/Scents" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
                         </div>
-                        <button type="submit" class="submit-btn">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                        <div id="formSuccess" class="form-success">
-                            <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.
+                    </div>
+
+                    <div class="project-card" data-category="web">
+                        <div class="project-image">
+                            <img src="assets/images/Logo.png" alt="Personal Portfolio">
+                            <div class="project-tags">
+                                <span class="project-tag">HTML</span>
+                                <span class="project-tag">CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
                         </div>
-                    </form>
+                        <div class="project-content">
+                            <h3 class="project-title">Personal Portfolio</h3>
+                            <p class="project-description">A professional personal website highlighting my journey as an IT student and Technical Consultant with modern design and interactivity.</p>
+                            <div class="project-links">
+                                <a href="https://ammalr.github.io/Portfolio/" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/AmmalR/Portfolio" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="web">
+                        <div class="project-image">
+                            <img src="assets/images/Botanica.jpg" alt="BotanicaOrganica">
+                            <div class="project-tags">
+                                <span class="project-tag">HTML</span>
+                                <span class="project-tag">CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">BotanicaOrganica</h3>
+                            <p class="project-description">A website dedicated to plant information and growth procedures, featuring interactive elements and botanical resources.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/AmmalR/BotanicaOrganica" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Projects Grid -->
+                <div class="projects-grid" id="mobile-projects">
+                    <div class="project-card" data-category="mobile">
+                        <div class="project-image">
+                            <img src="assets/images/CWF.png" alt="Care Without Fear">
+                            <div class="project-tags">
+                                <span class="project-tag">Android</span>
+                                <span class="project-tag">Java</span>
+                                <span class="project-tag">Firebase</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Care Without Fear</h3>
+                            <p class="project-description">A comprehensive Android application designed to digitalize and streamline healthcare and childcare services in Pakistan.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/AmmalR/CareWithoutFear" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database Projects Grid -->
+                <div class="projects-grid" id="database-projects">
+                    <div class="project-card" data-category="database">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Airport Management System">
+                            <div class="project-tags">
+                                <span class="project-tag">MySQL</span>
+                                <span class="project-tag">Database</span>
+                                <span class="project-tag">Normalization</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Airport Management System</h3>
+                            <p class="project-description">A backend database system focused on efficient storage and retrieval of flight and passenger data with complex query capabilities.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/AmmalR/Airport-Management-System" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="database">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Library Management System">
+                            <div class="project-tags">
+                                <span class="project-tag">C++</span>
+                                <span class="project-tag">Data Structures</span>
+                                <span class="project-tag">Algorithms</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Library Management System</h3>
+                            <p class="project-description">A software solution for managing book records, member registrations, and library inventory with efficient data structures.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/AmmalR/Library-Management-System" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WordPress Projects Grid -->
+                <div class="projects-grid" id="wordpress-projects">
+                    <div class="project-card" data-category="wordpress">
+                        <div class="project-image">
+                            <img src="assets/images/suplead.png" alt="Supead Company">
+                            <div class="project-tags">
+                                <span class="project-tag">WordPress</span>
+                                <span class="project-tag">Multilingual</span>
+                                <span class="project-tag">Corporate</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Supead Company Website</h3>
+                            <p class="project-description">A multilingual corporate website for Supead Company, focusing on professional service presentation across multiple regions.</p>
+                            <div class="project-links">
+                                <a href="https://www.supeadsa.com" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Website
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="wordpress">
+                        <div class="project-image">
+                            <img src="assets/images/ICM.jpg" alt="ICM Software House">
+                            <div class="project-tags">
+                                <span class="project-tag">WordPress</span>
+                                <span class="project-tag">Multi-site</span>
+                                <span class="project-tag">Global</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">ICM Software House Global Sites</h3>
+                            <p class="project-description">A global multi-site deployment for ICM Software House operating across Saudi Arabia, UK, USA, Canada, and Pakistan.</p>
+                            <div class="project-links">
+                                <a href="https://www.icmsh.us" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> USA Site
+                                </a>
+                                <a href="https://www.icm-pak.com" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Pakistan Site
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="wordpress">
+                        <div class="project-image">
+                            <img src="assets/images/Raahmart.jpeg" alt="Raahmart">
+                            <div class="project-tags">
+                                <span class="project-tag">WordPress</span>
+                                <span class="project-tag">E-Commerce</span>
+                                <span class="project-tag">Retail</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Raahmart</h3>
+                            <p class="project-description">An e-commerce website built on WordPress for an online retail store.</p>
+                            <div class="project-links">
+                                <a href="https://raahmart.com/" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Website
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="wordpress">
+                        <div class="project-image">
+                            <img src="assets/images/rdfpk.jpg" alt="RDF Pakistan">
+                            <div class="project-tags">
+                                <span class="project-tag">WordPress</span>
+                                <span class="project-tag">Organization</span>
+                                <span class="project-tag">Responsive</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">RDF Pakistan</h3>
+                            <p class="project-description">A WordPress website presenting the organization's work and initiatives.</p>
+                            <div class="project-links">
+                                <a href="https://rdfpk.org/" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Website
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="wordpress">
+                        <div class="project-image">
+                            <img src="assets/images/Dry Cleaning Junction.jpeg" alt="Dry Cleaning Junction">
+                            <div class="project-tags">
+                                <span class="project-tag">WordPress</span>
+                                <span class="project-tag">Service Business</span>
+                                <span class="project-tag">Responsive</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Dry Cleaning Junction</h3>
+                            <p class="project-description">A WordPress website for a dry cleaning and laundry service, built from the Figma design.</p>
+                            <div class="project-links">
+                                <a href="https://drycleaningjunction.com/" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Website
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UI/UX Projects Grid -->
+                <div class="projects-grid" id="uiux-projects">
+                    <div class="project-card quran-card" data-category="uiux">
+                        <div class="project-image">
+                            <img src="assets/images/Quran-al-Razaq.jpeg" alt="Quran Al-Razaq">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Quran-Al-Razaq</h3>
+                            <p class="project-description">Website layout and visual design concept, built in Figma.</p>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/make/geeI0hzUJT7mRmJ0H8SSPT/Home-page-design?fullscreen=1&t=k5RQM1QZXecZrFiD-1&code-node-id=0-6" target="_blank" class="project-link">
+                                    <i class="fab fa-figma"></i> View in Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card image-fit-card" data-category="uiux">
+                        <div class="project-image">
+                            <img src="assets/images/Prophetic Regimens.jpeg" alt="Prophetic Regimens">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Prophetic Regimens</h3>
+                            <p class="project-description">Interface design concept for a wellness and lifestyle brand.</p>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/make/OmqUAU1AQ1ZSyvr0yuV8N6/PropheticRegimens?fullscreen=1&t=MVuzfnS1uy9m1hYw-1&code-node-id=0-6" target="_blank" class="project-link">
+                                    <i class="fab fa-figma"></i> View in Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="uiux">
+                        <div class="project-image">
+                            <img src="assets/images/Beyond Catering.png" alt="Beyond Catering">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Beyond Catering</h3>
+                            <p class="project-description">Homepage design for a premium catering service brand.</p>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/make/cbObzdt0N31yQBqNfLWIJ9/Design-premium-catering-homepage?fullscreen=1&t=lFX9xyLZ5E2APK6v-1&code-node-id=0-6" target="_blank" class="project-link">
+                                    <i class="fab fa-figma"></i> View in Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card image-fit-card" data-category="uiux">
+                        <div class="project-image">
+                            <img src="assets/images/ERP.jpeg" alt="ERP System UI">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">ERP System UI</h3>
+                            <p class="project-description">Interface design for an ERP system — where the Oracle consulting background feeds directly into the design work.</p>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/design/hu9BFlWprpBbqQXyI67dCG/ERP?node-id=0-1&t=igtg8zB5Ai4wc1Zk-1" target="_blank" class="project-link">
+                                    <i class="fab fa-figma"></i> View in Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card image-fit-card" data-category="uiux">
+                        <div class="project-image">
+                            <img src="assets/images/Eizy Visa.jpeg" alt="Eizyvisa Consultancy">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Eizyvisa Consultancy</h3>
+                            <p class="project-description">Website design concept for a visa services platform.</p>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/make/cUTIqYSaMiJH4Lzopq5aWC/Eizyvisa-Homepage-Design?fullscreen=1&t=iQBQQbDPadR6T8gH-1&code-node-id=0-6" target="_blank" class="project-link">
+                                    <i class="fab fa-figma"></i> View in Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card image-fit-card" data-category="uiux">
+                        <div class="project-image">
+                            <img src="assets/images/Dry Cleaning Junction.jpeg" alt="Dry Cleaning Junction">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Dry Cleaning Junction</h3>
+                            <p class="project-description">Website design for a dry cleaning and laundry service business.</p>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/design/toBCTfitxQ9ps4jruc4XxO/Dry-Cleaning-Junction?node-id=0-1&t=Fe2dwAoeSiEHcrEr-1" target="_blank" class="project-link">
+                                    <i class="fab fa-figma"></i> View in Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card image-fit-card" data-category="uiux">
+                        <div class="project-image">
+                            <img src="assets/images/Blue Consultancy.jpeg" alt="Blue Consultancy">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Blue Consultancy</h3>
+                            <p class="project-description">Website design for a consultancy brand, built around a cool, professional palette.</p>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/design/CwGpD9IJSAnjb01n3X3nuQ/Blue-Consultancy?node-id=0-1&t=j00vKqEoWwuxaE29-1" target="_blank" class="project-link">
+                                    <i class="fab fa-figma"></i> View in Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card image-fit-card" data-category="uiux">
+                        <div class="project-image">
+                            <img src="assets/images/Raahmart.jpeg" alt="E-Commerce Websites">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Raahmart</h3>
+                            <p class="project-description">A set of e-commerce website design explorations.</p>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/design/hp9EYDbtGokSjdnEOQ3NZv/E-Commerce-Websites?node-id=0-1&t=vBWMmCZHwGjgwciz-1" target="_blank" class="project-link">
+                                    <i class="fab fa-figma"></i> View in Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card image-fit-card" data-category="uiux">
+                        <div class="project-image">
+                            <img src="assets/images/Haldi Gold.jpeg" alt="Haldi Gold Homepage Design">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Haldi Gold Homepage Design</h3>
+                            <p class="project-description">Homepage design for the Haldi Gold brand.</p>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/make/nV7LsQi2EFTojFUzkL24Lb/Haldi-Gold-Homepage-Design?code-node-id=0-9&p=f&t=z6FtPwhhzw012ckV-0&fullscreen=1">
+                                    <i class="fab fa-figma"></i> View in Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card image-fit-card" data-category="uiux">
+                        <div class="project-image">
+                            <img src="assets/images/Malind Tech.jpeg" alt="Malind Web">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Malind Web
+                                <span class="client-badge">Malind Tech</span>
+                            </h3>
+                            <p class="project-description">Website design work done as UI/UX Designer at Malind Tech.</p>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/design/2LhTlicH5m1Y80UWjj2Wk0/Malind-Web?node-id=0-1&t=LO5M6zOSJHDiTjYy-1" target="_blank" class="project-link">
+                                    <i class="fab fa-figma"></i> View in Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card image-fit-card" data-category="uiux">
+                        <div class="project-image">
+                            <img src="assets/images/Baba Cosmetics.jpeg" alt="Baba Cosmetics">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Baba Cosmetics</h3>
+                            <p class="project-description">Website design for a cosmetics brand.</p>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/make/MAyZAvz71x1BOWUFzzFCcV/Baba-Cosmetics-Home-Page?fullscreen=1&t=UPXMLb0lu2WfWKqG-1&code-node-id=0-6" target="_blank" class="project-link">
+                                    <i class="fab fa-figma"></i> View in Figma
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design Gallery -->
+                <div class="design-gallery" id="design-gallery">
+                    <div class="design-item">
+                        <img src="assets/images/2.PNG" alt="Design 1">
+                        <div class="design-overlay"><div class="design-title"></div></div>
+                    </div>
+                    <div class="design-item">
+                        <img src="assets/images/3.PNG" alt="Design 2">
+                        <div class="design-overlay"><div class="design-title"></div></div>
+                    </div>
+                    <div class="design-item">
+                        <img src="assets/images/4.PNG" alt="Design 3">
+                        <div class="design-overlay"><div class="design-title"></div></div>
+                    </div>
+                    <div class="design-item">
+                        <img src="assets/images/1.PNG" alt="Design 4">
+                        <div class="design-overlay"><div class="design-title"></div></div>
+                    </div>
+                    <div class="design-item">
+                        <img src="assets/images/5.png" alt="Design 5">
+                        <div class="design-overlay"><div class="design-title"></div></div>
+                    </div>
+                    <div class="design-item">
+                        <img src="assets/images/6.png" alt="Design 6">
+                        <div class="design-overlay"><div class="design-title"></div></div>
+                    </div>
+                    <div class="design-item">
+                        <img src="assets/images/7.png" alt="Design 7">
+                        <div class="design-overlay"><div class="design-title">Brand Identity 2</div></div>
+                    </div>
+                    <div class="design-item">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Design 8">
+                        <div class="design-overlay"><div class="design-title">UI/UX Design 1</div></div>
+                    </div>
+                </div>
+
+                <!-- No Projects Message -->
+                <div class="no-projects" id="no-projects">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>No Projects Found</h3>
+                    <p>There are no projects in this category at the moment.</p>
                 </div>
             </div>
         </div>
